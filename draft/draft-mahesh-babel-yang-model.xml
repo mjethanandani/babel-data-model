@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?rfc toc="yes"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+<rfc category="std" docName="draft-mahesh-babel-yang-model-00"
+     ipr="trust200902">
+  <front>
+    <title abbrev="Babel YANG model">YANG Data Model for Babel</title>
+
+    <author fullname="Mahesh Jethanandani" initials="M.J."
+            surname="Jethanandani">
+      <organization/>
+
+      <address>
+        <postal>
+          <street/>
+
+          <city/>
+
+          <code/>
+
+          <region>California</region>
+
+          <country>USA</country>
+        </postal>
+
+        <phone/>
+
+        <facsimile/>
+
+        <email>mjethanandani@gmail.com</email>
+      </address>
+    </author>
+
+    <author fullname="Barbara Stark" initials="B.S." surname="Stark">
+      <organization>AT&amp;T</organization>
+
+      <address>
+        <postal>
+          <street/>
+
+          <city>Atlanta</city>
+
+          <region>GA</region>
+
+          <code/>
+
+          <country>USA</country>
+        </postal>
+
+        <phone/>
+
+        <facsimile/>
+
+        <email>barbara.stark@att.com</email>
+
+        <uri/>
+      </address>
+    </author>
+
+    <date day="15" month="August" year="2018"/>
+
+    <area>Routing Area</area>
+
+    <workgroup>Babel Working Group</workgroup>
+
+    <keyword>babel</keyword>
+
+    <keyword>YANG</keyword>
+
+    <abstract>
+      <t>This document defines a data model for Babel.</t>
+    </abstract>
+
+    <note title="Requirements Language">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <xref
+      target="RFC2119">BCP 14</xref><xref target="RFC8174"/> when, and only
+      when, they appear in all capitals, as shown here..</t>
+    </note>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t/>
+
+      <t>Editorial Note (To be removed by RFC Editor) </t>
+
+      <t>This draft contains many placeholder values that need to be replaced
+      with finalized values at the time of publication. This note summarizes
+      all of the substitutions that are needed. Please note that no other RFC
+      Editor instructions are specified anywhere else in this document. </t>
+
+      <t>Artwork in this document contains shorthand references to drafts in
+      progress. Please apply the following replacements</t>
+
+      <t> <list style="symbols">
+          <t>"XXXX" --&gt; the assigned RFC value for this draft both in this
+          draft and in the YANG models under the revision statement.</t>
+
+          <t>Revision date in model, in the format 2018-04-27 needs to get
+          updated with the date the draft gets approved. The date also needs
+          to get reflected on the line with &lt;CODE BEGINS&gt;.</t>
+        </list></t>
+
+      <section title="Definitions and Acronyms">
+        <t><list style="symbols">
+            <t/>
+          </list></t>
+      </section>
+
+      <section title="Tree Diagram">
+        <t>For a reference to the annotations used in tree diagrams included
+        in this draft, please see <xref target="RFC8340">YANG Tree
+        Diagrams</xref>.</t>
+      </section>
+    </section>
+
+    <section title="Problem Statement">
+      <t>This document defines a <xref target="RFC7950">YANG 1.1</xref> data
+      model for the configuration and management of Babel.</t>
+
+      <section title="Information Model">
+        <t/>
+      </section>
+    </section>
+
+    <section anchor="IANA" title="IANA Considerations">
+      <t>This document registers ?? URIs and ?? YANG modules.</t>
+
+      <section title="URI Registrations">
+        <t/>
+      </section>
+
+      <section title="YANG Module Name Registration">
+        <t>This document registers ?? YANG module in the YANG Module Names
+        registry <xref target="RFC6020">YANG</xref>. </t>
+
+        <figure>
+          <artwork><![CDATA[name: 
+namespace: urn:ietf:params:xml:ns:yang:
+prefix: babel
+reference: RFC XXXX ]]></artwork>
+        </figure>
+      </section>
+    </section>
+
+    <section anchor="Security" title="Security Considerations">
+      <t>The YANG module specified in this document defines a schema for data
+      that is designed to be accessed via network management protocol such as
+      <xref target="RFC6241">NETCONF</xref> or <xref
+      target="RFC8040">RESTCONF</xref>. The lowest NETCONF layer is the secure
+      transport layer and the mandatory-to-implement secure transport is <xref
+      target="RFC6242">SSH</xref>. The lowest RESTCONF layer is HTTPS, and the
+      mandatory-to-implement secure transport is <xref
+      target="RFC5246">TLS</xref>. </t>
+
+      <t>The NETCONF Access Control Model (<xref target="RFC8341">NACM</xref>)
+      provides the means to restrict access for particular NETCONF users to a
+      pre-configured subset of all available NETCONF protocol operations and
+      content. </t>
+
+      <t>There are a number of data nodes defined in the YANG module which are
+      writable/creatable/deletable (i.e., config true, which is the default).
+      These data nodes may be considered sensitive or vulnerable in some
+      network environments. Write operations (e.g., &lt;edit-config&gt;) to
+      these data nodes without proper protection can have a negative effect on
+      network operations. </t>
+
+      <t>These are the subtrees and data nodes and their sensitivity/
+      vulnerability:</t>
+    </section>
+
+    <section anchor="Acknowledgements" title="Acknowledgements">
+      <t/>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <?rfc include="reference.RFC.2119"?>
+    </references>
+
+    <references title="Informative References">
+      <reference anchor="InfRef">
+        <front>
+          <title/>
+
+          <author>
+            <organization/>
+          </author>
+
+          <date year="2004"/>
+        </front>
+      </reference>
+    </references>
+
+    <section title="An Appendix">
+      <t/>
+    </section>
+  </back>
+</rfc>
