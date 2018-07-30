@@ -3,6 +3,8 @@
 # https://github.com/cabo/kramdown-rfc2629
 # https://github.com/Juniper/libslax/tree/master/doc/oxtradoc
 # https://tools.ietf.org/tools/idnits/
+# https://pypi.org/project/pyang/
+# https://github.com/CESNET/libyang
 
 xml2rfc ?= xml2rfc
 kramdown-rfc2629 ?= kramdown-rfc2629
