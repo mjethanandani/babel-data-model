@@ -77,7 +77,7 @@
     <keyword>YANG</keyword>
 
     <abstract>
-      <t>This document defines a data model for Babel.</t>
+      <t>This document defines a data model for the Babel routing protocol. The data model is defined using the YANG data modeling language. </t>
     </abstract>
 
     <note title="Requirements Language">
@@ -93,12 +93,12 @@
     <section title="Introduction">
       <t/>
 
-      <t>Editorial Note (To be removed by RFC Editor) </t>
-
-      <t>This draft contains many placeholder values that need to be replaced
-      with finalized values at the time of publication. This note summarizes
-      all of the substitutions that are needed. Please note that no other RFC
-      Editor instructions are specified anywhere else in this document. </t>
+      <t>This document defines a data model for the Babel routing
+      protocol <xref target="I-D.ietf-babel-rfc6126bis"/>.
+      The data model is defined using the YANG
+      <xref target="RFC7950"/> data
+      modeling language. It is based on the Babel Information Model
+      <xref target="I-D.ietf-babel-information-model"/>. </t>
 
       <t>Artwork in this document contains shorthand references to drafts in
       progress. Please apply the following replacements</t>
@@ -146,7 +146,7 @@
         registry <xref target="RFC6020">YANG</xref>. </t>
 
         <figure>
-          <artwork><![CDATA[name: 
+          <artwork><![CDATA[name:
 namespace: urn:ietf:params:xml:ns:yang:
 prefix: babel
 reference: RFC XXXX ]]></artwork>
@@ -188,20 +188,20 @@ reference: RFC XXXX ]]></artwork>
   <back>
     <references title="Normative References">
       <?rfc include="reference.RFC.2119"?>
+      <?rfc include="reference.RFC.7950"?>
+      <?rfc include="reference.RFC.8174"?>
+      <?rfc include="reference.I-D.ietf-babel-rfc6126bis"?>
     </references>
 
     <references title="Informative References">
-      <reference anchor="InfRef">
-        <front>
-          <title/>
-
-          <author>
-            <organization/>
-          </author>
-
-          <date year="2004"/>
-        </front>
-      </reference>
+      <?rfc include="reference.RFC.5246"?>
+      <?rfc include="reference.RFC.6020"?>
+      <?rfc include="reference.RFC.6241"?>
+      <?rfc include="reference.RFC.6242"?>
+      <?rfc include="reference.RFC.8040"?>
+      <?rfc include="reference.RFC.8340"?>
+      <?rfc include="reference.RFC.8341"?>
+      <?rfc include="reference.I-D.ietf-babel-information-model"?>
     </references>
 
     <section title="An Appendix">
