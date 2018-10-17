@@ -17,7 +17,7 @@
 
     <author fullname="Mahesh Jethanandani" initials="M.J."
             surname="Jethanandani">
-      <organization/>
+      <organization>VMware</organization>
 
       <address>
         <postal>
@@ -77,7 +77,8 @@
     <keyword>YANG</keyword>
 
     <abstract>
-      <t>This document defines a data model for the Babel routing protocol. The data model is defined using the YANG data modeling language. </t>
+      <t>This document defines a data model for the Babel routing protocol.
+      The data model is defined using the YANG data modeling language.</t>
     </abstract>
 
     <note title="Requirements Language">
@@ -93,17 +94,16 @@
     <section title="Introduction">
       <t/>
 
-      <t>This document defines a data model for the Babel routing
-      protocol <xref target="I-D.ietf-babel-rfc6126bis"/>.
-      The data model is defined using the YANG
-      <xref target="RFC7950"/> data
-      modeling language. It is based on the Babel Information Model
-      <xref target="I-D.ietf-babel-information-model"/>. </t>
+      <t>This document defines a data model for the Babel routing protocol
+      <xref target="I-D.ietf-babel-rfc6126bis"/>. The data model is defined
+      using the YANG <xref target="RFC7950"/> data modeling language. It is
+      based on the <xref target="I-D.ietf-babel-information-model">Babel
+      Information Model </xref>.</t>
 
       <t>Artwork in this document contains shorthand references to drafts in
       progress. Please apply the following replacements</t>
 
-      <t> <list style="symbols">
+      <t><list style="symbols">
           <t>"XXXX" --&gt; the assigned RFC value for this draft both in this
           draft and in the YANG models under the revision statement.</t>
 
@@ -125,12 +125,35 @@
       </section>
     </section>
 
-    <section title="Problem Statement">
+    <section title="Babel Module">
       <t>This document defines a <xref target="RFC7950">YANG 1.1</xref> data
-      model for the configuration and management of Babel.</t>
+      model for the configuration and management of Babel. The YANG module is
+      based on the <xref target="I-D.ietf-babel-information-model">Babel
+      Information Model</xref>.</t>
 
       <section title="Information Model">
         <t/>
+      </section>
+
+      <section title="YANG Module">
+        <t>This module imports definitions from <xref target="RFC6991">Common
+        YANG Data Types</xref>.</t>
+
+        <figure>
+          <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-tree.txt)
+]]></artwork>
+        </figure>
+
+        <figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "ietf-babel@YYYY-MM-DD.yang"
+
+INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD.yang)
+
+<CODE ENDS>
+]]></artwork>
+        </figure>
       </section>
     </section>
 
@@ -143,7 +166,7 @@
 
       <section title="YANG Module Name Registration">
         <t>This document registers ?? YANG module in the YANG Module Names
-        registry <xref target="RFC6020">YANG</xref>. </t>
+        registry <xref target="RFC6020">YANG</xref>.</t>
 
         <figure>
           <artwork><![CDATA[name:
@@ -162,19 +185,19 @@ reference: RFC XXXX ]]></artwork>
       transport layer and the mandatory-to-implement secure transport is <xref
       target="RFC6242">SSH</xref>. The lowest RESTCONF layer is HTTPS, and the
       mandatory-to-implement secure transport is <xref
-      target="RFC5246">TLS</xref>. </t>
+      target="RFC5246">TLS</xref>.</t>
 
       <t>The NETCONF Access Control Model (<xref target="RFC8341">NACM</xref>)
       provides the means to restrict access for particular NETCONF users to a
       pre-configured subset of all available NETCONF protocol operations and
-      content. </t>
+      content.</t>
 
       <t>There are a number of data nodes defined in the YANG module which are
       writable/creatable/deletable (i.e., config true, which is the default).
       These data nodes may be considered sensitive or vulnerable in some
       network environments. Write operations (e.g., &lt;edit-config&gt;) to
       these data nodes without proper protection can have a negative effect on
-      network operations. </t>
+      network operations.</t>
 
       <t>These are the subtrees and data nodes and their sensitivity/
       vulnerability:</t>
@@ -188,19 +211,31 @@ reference: RFC XXXX ]]></artwork>
   <back>
     <references title="Normative References">
       <?rfc include="reference.RFC.2119"?>
+
+      <?rfc include='reference.RFC.6991'?>
+
       <?rfc include="reference.RFC.7950"?>
+
       <?rfc include="reference.RFC.8174"?>
+
       <?rfc include="reference.I-D.ietf-babel-rfc6126bis"?>
     </references>
 
     <references title="Informative References">
       <?rfc include="reference.RFC.5246"?>
+
       <?rfc include="reference.RFC.6020"?>
+
       <?rfc include="reference.RFC.6241"?>
+
       <?rfc include="reference.RFC.6242"?>
+
       <?rfc include="reference.RFC.8040"?>
+
       <?rfc include="reference.RFC.8340"?>
+
       <?rfc include="reference.RFC.8341"?>
+
       <?rfc include="reference.I-D.ietf-babel-information-model"?>
     </references>
 
