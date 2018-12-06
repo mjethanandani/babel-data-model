@@ -22,10 +22,6 @@ module ietf-babel {
     prefix "rt";
   }
 
-  import ietf-routing-types {
-    prefix "rt-types";
-  }
-
   organization
     "IETF Babel routing protocl Working Group";
 
@@ -338,7 +334,9 @@ module ietf-babel {
 
       leaf neighbor {
 	type leafref {
-	  path "../../interfaces/neighbor-objects/neighbor-address";
+	  path "/rt:routing/rt:control-plane-protocols/" +
+	       "rt:control-plane-protocol/babel/interfaces/" +
+	       "neighbor-objects/neighbor-address";
 	}
 	description
 	  "Reference to the babel-neighbors entry for the neighbor
@@ -430,7 +428,10 @@ module ietf-babel {
       reference
 	"RFC YYYY, Babel Information Model, Section 3.1.";
     }
+    description
+      "Common grouping for routing used in RIB augmentation.";
   }
+
   /*
    * Data model
    */
@@ -442,6 +443,12 @@ module ietf-babel {
 	"Augmentation is valid only when the instance of routing type
          is of type 'babel'.";
     }
+    description
+      "Augment the routing module to support features such as VRF.";
+    reference
+      "YANG Routing Management, RFC 8022, Lhotka & Lindem, November
+       2016.";
+
     container babel {
       presence "A Babel container.";
       description
@@ -788,28 +795,6 @@ module ietf-babel {
 	  "RFC YYYY, Babel Information Model, Section 3.1.";
       }
 
-      augment "/rt:routing/rt:ribs/rt:rib/rt:routes/rt:route" {
-	when "derived-from(rt:source-protocol, 'babel')" {
-	  description
-	    "Augmentation is valid for a routes whose source protocol
-             is Babel.";
-	}
-	description
-	  "Babel specific route attributes.";
-	uses routes;
-      }
-
-      augment "/rt:routing/rt:ribs/rt:rib/rt:output/rt:route" {
-	when "derived-from(rt:source-protocol, 'babel')" {
-	  description
-	    "Augmentation is valid for a routes whose source protocol
-             is Babel.";
-	}
-	description
-	  "Babel specific route attributes.";
-	uses routes;
-      }
-
       list security {
 	key "mechanism";
 
@@ -824,5 +809,27 @@ module ietf-babel {
 	  "RFC YYYY, Babel Information Model, Section 3.1.";
       }
     }
+  }
+  augment "/rt:routing-state/rt:ribs/rt:rib/rt:routes/rt:route" {
+    when "derived-from(rt:source-protocol, 'babel')" {
+      description
+	"Augmentation is valid for a routes whose source protocol
+         is Babel.";
+    }
+    description
+      "Babel specific route attributes.";
+    uses routes;
+  }
+
+  augment "/rt:routing-state/rt:ribs/rt:rib/rt:active-route/" +
+          "rt:output/rt:route" {
+    when "derived-from(rt:source-protocol, 'babel')" {
+      description
+	"Augmentation is valid for a routes whose source protocol
+         is Babel.";
+    }
+    description
+      "Babel specific route attributes.";
+    uses routes;
   }
 }
