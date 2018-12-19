@@ -10,8 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-mahesh-babel-yang-model-00"
-     ipr="trust200902">
+<rfc category="std" docName="draft-ietf-babel-yang-model-00" ipr="trust200902">
   <front>
     <title abbrev="Babel YANG model">YANG Data Model for Babel</title>
 
@@ -66,7 +65,7 @@
       </address>
     </author>
 
-    <date day="15" month="August" year="2018"/>
+    <date day="18" month="December" year="2018"/>
 
     <area>Routing Area</area>
 
