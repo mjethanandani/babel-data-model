@@ -20,6 +20,8 @@ module ietf-babel {
   }
   import ietf-routing {
     prefix "rt";
+    reference
+      "RFC 8349 - YANG Routing Management";
   }
 
   organization
@@ -363,7 +365,7 @@ module ietf-babel {
              Section 3.5.5.";
 	}
 
-	leaf calcuated-metric {
+	leaf calculated-metric {
 	  type uint16;
 	  description
 	    "A calculated metric for this route. How the metric is
@@ -446,48 +448,48 @@ module ietf-babel {
     description
       "Augment the routing module to support features such as VRF.";
     reference
-      "YANG Routing Management, RFC 8022, Lhotka & Lindem, November
-       2016.";
+      "YANG Routing Management, RFC 8349, Lhotka & Lindem, March
+       2018.";
 
     container babel {
       presence "A Babel container.";
-      description
-	"This is a top level container for the Babel routing protocol.";
 
       leaf version {
-	type string;
-	description
-	  "This is the version of the babel protocol implemented.";
-	reference
-	  "RFC YYYY, Babel Information Model, Section 3.1.";
+        type string;
+        config false;
+        description
+          "This is the version of the babel protocol implemented.";
+        reference
+          "RFC YYYY, Babel Information Model, Section 3.1.";
       }
 
       leaf enable {
-	type boolean;
-	default false;
-	description
-	  "When written, it configures whether the protocol should be
-         enabled. A read from the <running> or <intended> datastore
-         therefore indicates the configured adminstrative value of
-         whether the protocol is enabled or not.
+        type boolean;
+        default false;
+        description
+          "When written, it configures whether the protocol should be
+           enabled. A read from the <running> or <intended> datastore
+           therefore indicates the configured administrative value of
+           whether the protocol is enabled or not.
 
-         A read from the <operational> datastore indicates whether
-         the protocol is actually running or not, i.e. it indicates
-         the operational state of the protocol.";
+           A read from the <operational> datastore indicates whether
+           the protocol is actually running or not, i.e. it indicates
+           the operational state of the protocol.";
 	reference
 	  "RFC YYYY, Babel Information Model, Section 3.1.";
       }
 
       leaf router-id {
-	type binary;
-	mandatory "true";
-	description
-	  "Every Babel speaker is assigned a router-id, which is an
-         arbitrary string of 8 octets that is assumed to be unique
-         across the routing domain";
-	reference
-	  "RFC YYYY, Babel Information Model, Section 3.1,
-         rfc6126bis, The Babel Routing Protocol. Section 3.";
+        type binary;
+        config false;
+        mandatory "true";
+        description
+          "Every Babel speaker is assigned a router-id, which is an
+           arbitrary string of 8 octets that is assumed to be unique
+           across the routing domain";
+        reference
+          "RFC YYYY, Babel Information Model, Section 3.1,
+           rfc6126bis, The Babel Routing Protocol. Section 3.";
       }
 
       leaf-list link-type {
@@ -514,89 +516,90 @@ module ietf-babel {
 	type identityref {
 	  base "babel-cost-compute-algorithm";
 	}
-	description
-	  "List of cost compute algorithms supported by this
-         implementation of Babel.";
-	reference
-	  "RFC YYYY, Babel Information Model, Section 3.1.";
+        description
+          "List of cost compute algorithms supported by this
+           implementation of Babel.";
+        reference
+          "RFC YYYY, Babel Information Model, Section 3.1.";
       }
 
       leaf-list security-supported {
 	type identityref {
 	  base "babel-security-supported";
 	}
-	description
-	  "Babel security mechanism used by this implementation or
-         per interface.";
-	reference
-	  "RFC YYYY, Babel Information Model, Section 3.1.";
+        description
+          "Babel security mechanism used by this implementation or
+           per interface.";
+        reference
+          "RFC YYYY, Babel Information Model, Section 3.1.";
       }
 
-      container transport {
-	leaf udp-port {
-	  type inet:port-number;
-	  default "6696";
-	  description
-	    "UDP port for sending and receiving Babel messages. The
-           default port is 6696.";
-	  reference
-	    "RFC YYYY, Babel Information Model, Section 3.2.";
-	}
+      container constants {
+        leaf udp-port {
+          type inet:port-number;
+          default "6696";
+          description
+            "UDP port for sending and receiving Babel messages. The
+             default port is 6696.";
+          reference
+            "RFC YYYY, Babel Information Model, Section 3.2.";
+        }
 
 	leaf mcast-group {
 	  type inet:ip-address;
 	  default "ff02:0:0:0:0:0:1:6";
 	  description
 	    "Multicast group for sending and receiving multicast
-           announcements on IPv6.";
+             announcements on IPv6.";
 	  reference
 	    "RFC YYYY, Babel Information Model, Section 3.2.";
 	}
 	description
-	  "Babel Transport object.";
+	  "Babel Constants object.";
 	reference
 	  "RFC YYYY, Babel Information Model, Section 3.1.";
       }
-      list interfaces {
-	key "reference";
 
-	leaf reference {
-	  type if:interface-ref;
-	  description
-	    "Reference to an interface object as defined by the data
-           model (e.g., YANG, BBF TR-181); data model is assumed to
-           allow for referencing of interface objects which may be at
-           any layer (physical, Ethernet MAC, IP, tunneled IP, etc.).
-           Referencing syntax will be specific to the data model. If
-           there is no set of interface objects available, this should
-           be a string that indicates the interface name used by the
-           underlying operating system.";
-	  reference
-	    "RFC YYYY, Babel Information Model, Section 3.3.";
-	}
+      list interfaces {
+        key "reference";
+
+        leaf reference {
+          type if:interface-ref;
+          description
+            "Reference to an interface object as defined by the data
+             model (e.g., YANG, BBF TR-181); data model is assumed to
+             allow for referencing of interface objects which may be at
+             any layer (physical, Ethernet MAC, IP, tunneled IP, etc.).
+             Referencing syntax will be specific to the data model. If
+             there is no set of interface objects available, this should
+             be a string that indicates the interface name used by the
+             underlying operating system.";
+          reference
+            "RFC YYYY, Babel Information Model, Section 3.3.";
+        }
 	leaf enable {
-	  type boolean;
-	  default "true";
-	  description
+          type boolean;
+          default "true";
+          description
 	    "If true, babel sends and receives messages on this
-           interface. If false, babel messages received on this
-           interface are ignored and none are sent.";
-	  reference
-	    "RFC YYYY, Babel Information Model, Section 3.3.";
+             interface. If false, babel messages received on this
+             interface are ignored and none are sent.";
+          reference
+            "RFC YYYY, Babel Information Model, Section 3.3.";
 	}
 	leaf link-type {
-	  type identityref {
-	    base babel-link-type;
-	  }
-	  description
-	    "Indicates the type of link. Set of values of supported
-           link types where the following enumeration values MUST
-           be supported when applicable: 'ethernet', 'wireless',
-           'tunnel', and 'other'. Additional values MAY be
-           supported.";
-	  reference
-	    "RFC YYYY, Babel Information Model, Section 3.3.";
-	}
+          type identityref {
+            base babel-link-type;
+          }
+          description
+            "Indicates the type of link. Set of values of supported
+             link types where the following enumeration values MUST
+             be supported when applicable: 'ethernet', 'wireless',
+             'tunnel', and 'other'. Additional values MAY be
+             supported.";
+          reference
+            "RFC YYYY, Babel Information Model, Section 3.3.";
+        }
 	leaf mcast-hello-seqno {
 	  type uint16;
 	  config false;
@@ -606,33 +609,33 @@ module ietf-babel {
 	  reference
 	    "RFC YYYY, Babel Information Model, Section 3.3.";
 	}
-	leaf ucast-hello-seqno {
-	  type uint16;
-	  config false;
-	  description
-	    "The current sequence number in use for unicast hellos
-           sent on this interface.";
-	  reference
-	    "RFC YYYY, Babel Information Model, Section 3.3.";
-	}
-	leaf mcast-hello-interval {
-	  type int16;
-	  config false;
-	  description
-	    "The current multicast hello interval in use for hellos
-           sent on this interface.";
-	  reference
-	    "RFC YYYY, Babel Information Model, Section 3.3.";
-	}
-	leaf ucast-hello-interval {
-	  type int16;
-	  config false;
-	  description
-	    "The current unicast hello interval in use for hellos sent
-           on this interface.";
-	  reference
-	    "RFC YYYY, Babel Information Model, Section 3.3.";
-	}
+        leaf ucast-hello-seqno {
+          type uint16;
+          config false;
+          description
+            "The current sequence number in use for unicast hellos
+             sent on this interface.";
+          reference
+            "RFC YYYY, Babel Information Model, Section 3.3.";
+        }
+        leaf mcast-hello-interval {
+          type int16;
+          config false;
+          description
+            "The current multicast hello interval in use for hellos
+             sent on this interface.";
+          reference
+            "RFC YYYY, Babel Information Model, Section 3.3.";
+        }
+        leaf ucast-hello-interval {
+          type int16;
+          config false;
+          description
+            "The current unicast hello interval in use for hellos sent
+             on this interface.";
+          reference
+            "RFC YYYY, Babel Information Model, Section 3.3.";
+        }
 	leaf update-interval {
 	  type uint32;
 	  description
@@ -641,29 +644,29 @@ module ietf-babel {
 	    "RFC YYYY, Babel Information Model, Section 3.3.";
 	}
 
-	leaf message-log-enable {
-	  type boolean;
-	  description
-	    "If true, logging of babel messages received on this
-           interface is enabled; if false, babel messages are not
-           logged.";
-	  reference
-	    "RFC YYYY, Babel Information Model, Section 3.3.";
+        leaf message-log-enable {
+          type boolean;
+          description
+            "If true, logging of babel messages received on this
+             interface is enabled; if false, babel messages are not
+             logged.";
+          reference
+            "RFC YYYY, Babel Information Model, Section 3.3.";
 	}
 
-	list message-log {
-	  key "log-time";
+        list message-log {
+          key "log-time";
 
-	  uses log;
-	  description
-	    "Log entries that have timestamp of a received Babel
-           message and the entire received Babel message (including
-           Ethernet frame and IP headers, if possible). An
-           implementation must restrict the size of this log, but how
-           and what size is implementation specific.";
-	  reference
-	    "RFC YYYY, Babel Information Model, Section 3.3.";
-	}
+          uses log;
+          description
+            "Log entries that have timestamp of a received Babel
+             message and the entire received Babel message (including
+             Ethernet frame and IP headers, if possible). An
+             implementation must restrict the size of this log, but how
+             and what size is implementation specific.";
+          reference
+            "RFC YYYY, Babel Information Model, Section 3.3.";
+        }
 
 	list neighbor-objects {
 	  key "neighbor-address";
@@ -676,70 +679,70 @@ module ietf-babel {
 	      "RFC YYYY, Babel Information Model, Section 3.4.";
 	  }
 
-	  leaf hello-mcast-history {
-	    type string;
-	    description
-	      "The multicast Hello history of whether or not the
-             multicast Hello messages prior to babel-exp-mcast-
-             hello-seqno were received, with a '1' for the most
-             recent Hello placed in the most significant bit and
-             prior Hellos shifted right (with '0' bits placed
-             between prior Hellos and most recent Hello for any
-             not-received Hellos); represented as a string using
-             utf-8 encoded hex digits where a '1' bit = Hello
-             received and a '0' bit = Hello not received.";
-	    reference
-	      "RFC YYYY, Babel Information Model, Section 3.4.";
-	  }
+          leaf hello-mcast-history {
+            type string;
+            description
+              "The multicast Hello history of whether or not the
+               multicast Hello messages prior to babel-exp-mcast-
+               hello-seqno were received, with a '1' for the most
+               recent Hello placed in the most significant bit and
+               prior Hellos shifted right (with '0' bits placed
+               between prior Hellos and most recent Hello for any
+               not-received Hellos); represented as a string using
+               utf-8 encoded hex digits where a '1' bit = Hello
+               received and a '0' bit = Hello not received.";
+            reference
+              "RFC YYYY, Babel Information Model, Section 3.4.";
+          }
 
-	  leaf hello-ucast-history {
-	    type string;
-	    description
-	      "The unicast Hello history of whether or not the
-             unicast Hello messages prior to babel-exp-ucast-
-             hello-seqno were received, with a '1' for the most
-             recent Hello placed in the most significant bit and
-             prior Hellos shifted right (with '0' bits placed
-             between prior Hellos and most recent Hello for any
-             not-received Hellos); represented as a string using
-             utf-8 encoded hex digits where a '1' bit = Hello
-             received and a '0' bit = Hello not received.";
-	    reference
-	      "RFC YYYY, Babel Information Model, Section 3.4.";
-	  }
+          leaf hello-ucast-history {
+            type string;
+            description
+              "The unicast Hello history of whether or not the
+               unicast Hello messages prior to babel-exp-ucast-
+               hello-seqno were received, with a '1' for the most
+               recent Hello placed in the most significant bit and
+               prior Hellos shifted right (with '0' bits placed
+               between prior Hellos and most recent Hello for any
+               not-received Hellos); represented as a string using
+               utf-8 encoded hex digits where a '1' bit = Hello
+               received and a '0' bit = Hello not received.";
+            reference
+              "RFC YYYY, Babel Information Model, Section 3.4.";
+          }
 
-	  leaf txcost {
-	    type int32;
-	    description
-	      "Transmission cost value from the last IHU packet
-             received from this neighbor, or maximum value
-             (infinity) to indicates the IHU hold timer for this
-             neighbor has expired description.";
-	    reference
-	      "RFC YYYY, Babel Information Model, Section 3.4.";
-	  }
+          leaf txcost {
+            type int32;
+            description
+              "Transmission cost value from the last IHU packet
+               received from this neighbor, or maximum value
+               (infinity) to indicates the IHU hold timer for this
+               neighbor has expired description.";
+            reference
+              "RFC YYYY, Babel Information Model, Section 3.4.";
+          }
 
-	  leaf exp-mcast-hello-seqno {
-	    type uint16;
-	    description
-	      "Expected multicast Hello sequence number of next Hello
-             to be received from this neighbor; if multicast Hello
-             messages are not expected, or processing of multicast
-             messages is not enabled, this MUST be 0.";
-	    reference
-	      "RFC YYYY, Babel Information Model, Section 3.4.";
-	  }
+          leaf exp-mcast-hello-seqno {
+            type uint16;
+            description
+              "Expected multicast Hello sequence number of next Hello
+               to be received from this neighbor; if multicast Hello
+               messages are not expected, or processing of multicast
+               messages is not enabled, this MUST be 0.";
+            reference
+              "RFC YYYY, Babel Information Model, Section 3.4.";
+          }
 
-	  leaf exp-ucast-hello-seqno {
-	    type uint16;
-	    description
-	      "Expected unicast Hello sequence number of next Hello to
-             be received from this neighbor; if unicast Hello
-             messages are not expected, or processing of unicast
-             messages is not enabled, this MUST be 0.";
-	    reference
-	      "RFC YYYY, Babel Information Model, Section 3.4.";
-	  }
+          leaf exp-ucast-hello-seqno {
+            type uint16;
+            description
+              "Expected unicast Hello sequence number of next Hello to
+               be received from this neighbor; if unicast Hello
+               messages are not expected, or processing of unicast
+               messages is not enabled, this MUST be 0.";
+            reference
+              "RFC YYYY, Babel Information Model, Section 3.4.";
+          }
 
 	  leaf neighbor-ihu-interval {
 	    type int32;
@@ -749,65 +752,68 @@ module ietf-babel {
 	      "RFC YYYY, Babel Information Model, Section 3.4.";
 	  }
 
-	  leaf rxcost {
-	    type int32;
-	    description
-	      "Reception cost calculated for this neighbor. This value
-             is usually derived from the Hello history, which may be
-             combined with other data, such as statistics maintained
-             by the link layer. The rxcost is sent to a neighbour in
-             each IHU.";
-	    reference
-	      "RFC YYYY, Babel Information Model, Section 3.4.";
-	  }
+          leaf rxcost {
+            type int32;
+            description
+              "Reception cost calculated for this neighbor. This value
+               is usually derived from the Hello history, which may be
+               combined with other data, such as statistics maintained
+               by the link layer. The rxcost is sent to a neighbor in
+               each IHU.";
+            reference
+              "RFC YYYY, Babel Information Model, Section 3.4.";
+          }
 
-	  leaf cost {
-	    type int32;
-	    description
-	      "Link cost is computed from the values maintained in
-             the neighbour table. The statistics kept in the neighbour
-             table about the reception of Hellos, and the txcost
-             computed from received IHU packets.";
-	    reference
-	      "RFC YYYY, Babel Information Model, Section 3.4.";
-	  }
-	  description
-	    "A set of Babel Neighbor Object.";
-	  reference
-	    "RFC YYYY, Babel Information Model, Section 3.3.";
-	}
+          leaf cost {
+            type int32;
+            description
+              "Link cost is computed from the values maintained in
+               the neighbor table. The statistics kept in the neighbor
+               table about the reception of Hellos, and the txcost
+               computed from received IHU packets.";
+            reference
+              "RFC YYYY, Babel Information Model, Section 3.4.";
+          }
+          description
+            "A set of Babel Neighbor Object.";
+          reference
+            "RFC YYYY, Babel Information Model, Section 3.3.";
+        }
 
-	list security {
-	  key "mechanism";
+        list security {
+          key "mechanism";
 
-	  uses security;
-	  description
-	    "A security-obj object that applies to this interface. If
-           implemented, this allows security to be enabled only on
-           specific interfaces or allows different security mechanisms
-           to be enabled on different interfaces.";
-	  reference
-	    "RFC YYYY, Babel Information Model, Section 3.3.";
-	}
-	description
-	  "A set of Babel Interface objects.";
-	reference
-	  "RFC YYYY, Babel Information Model, Section 3.1.";
+          uses security;
+          description
+            "A security-obj object that applies to this interface. If
+             implemented, this allows security to be enabled only on
+             specific interfaces or allows different security mechanisms
+             to be enabled on different interfaces.";
+          reference
+            "RFC YYYY, Babel Information Model, Section 3.5.";
+        }
+        description
+          "A set of Babel Interface objects.";
+        reference
+          "RFC YYYY, Babel Information Model, Section 3.1.";
       }
 
       list security {
-	key "mechanism";
+        key "mechanism";
 
-	uses security;
-	description
-	  "A security-obj object that applies to all interfaces. If this
-         object is implemented, it allows a security mechanism to be
-         enabled or disabled in a manner that applies to all Babel
-         messages on all interfaces. If enabled, unauthenticated
-         packets will be dropped.";
-	reference
-	  "RFC YYYY, Babel Information Model, Section 3.1.";
+        uses security;
+        description
+          "A security-obj object that applies to all interfaces. If this
+           is implemented, it allows a security mechanism to be enabled
+           or disabled in a manner that applies to all Babel messages on
+           all interfaces.";
+        reference
+          "RFC YYYY, Babel Information Model, Section 3.5.";
       }
+      description
+        "Babel Information Objects.";
+      reference
+        "RFC YYYY, Babel Information Model, Section 3.1.";
     }
   }
   augment "/rt:routing/rt:ribs/rt:rib/rt:routes/rt:route" {
