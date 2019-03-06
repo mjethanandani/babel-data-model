@@ -95,21 +95,31 @@
 
       <t>This document defines a data model for the Babel routing protocol
       <xref target="I-D.ietf-babel-rfc6126bis"/>. The data model is defined
-      using the YANG <xref target="RFC7950"/> data modeling language. It is
-      based on the <xref target="I-D.ietf-babel-information-model">Babel
-      Information Model </xref>.</t>
+      using <xref target="RFC7950">YANG 1.1 </xref> data modeling language and
+      is <xref target="RFC8342">Network Management Datastore Architecture
+      (NDMA)</xref> compatible. It is based on the <xref
+      target="I-D.ietf-babel-information-model">Babel Information Model
+      </xref>.</t>
 
-      <t>Artwork in this document contains shorthand references to drafts in
-      progress. Please apply the following replacements</t>
+      <section title="Note to RFC Editor">
+        <t>Artwork in this document contains shorthand references to drafts in
+        progress. Please apply the following replacements and remove this note
+        before publication.</t>
 
-      <t><list style="symbols">
-          <t>"XXXX" --&gt; the assigned RFC value for this draft both in this
-          draft and in the YANG models under the revision statement.</t>
+        <t><list style="symbols">
+            <t>"XXXX" --&gt; the assigned RFC value for this draft both in
+            this draft and in the YANG models under the revision
+            statement.</t>
 
-          <t>Revision date in model, in the format 2018-04-27 needs to get
-          updated with the date the draft gets approved. The date also needs
-          to get reflected on the line with &lt;CODE BEGINS&gt;.</t>
-        </list></t>
+            <t>"ZZZZ" --&gt; the assigned RFC value for <xref
+            target="I-D.ietf-babel-information-model">Babel Information Model
+            </xref></t>
+
+            <t>Revision date in model, in the format YYYY-MM-DD needs to get
+            updated with the date the draft gets approved. The date also needs
+            to get reflected on the line with &lt;CODE BEGINS&gt;.</t>
+          </list></t>
+      </section>
 
       <section title="Definitions and Acronyms">
         <t><list style="symbols">
@@ -131,12 +141,45 @@
       Information Model</xref>.</t>
 
       <section title="Information Model">
-        <t/>
+        <t>The following diagram illustrates a top level hierarchy of the
+        model. In addition to information like the version number implemented
+        by this device, the model contains subtrees on constants, interfaces,
+        routes and security.</t>
+
+        <t><figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
+]]></artwork>
+          </figure></t>
+
+        <t>The interfaces subtree describes attributes such as interface
+        object that is being referenced, the type of link as enumerated by
+        Babel Link Types, and whether the interface is enabled or not.</t>
+
+        <t>The constants subtree describes the UDP port used for sending and
+        receiving Babel messages, and the multicast group used to send and
+        receive announcements on IPv6.</t>
+
+        <t>The routes subtree describes objects such as the prefix for which
+        the route is advertised, a reference to the neighboring route, and
+        next-hop address.</t>
+
+        <t>Finally, for security two subtree are defined. The hmac subtree
+        which refers to parameters related to HMAC security mechanism. The
+        boolean flag apply-all indicates whether HMAC mechanism is applicable
+        for all interfaces or just for interfaces listed in the leaf-list
+        'interfaces'. The dtls subtree refers to parameters related to DTLS
+        security mechanism. Similar to the HMAC mechanism, the boolean flag
+        apply-all indicates whether DTLS mechanism is applicable for all
+        interfaces or just for interfaces listed in the leaf-list
+        'interfaces'.</t>
       </section>
 
       <section title="YANG Module">
-        <t>This module imports definitions from <xref target="RFC6991">Common
-        YANG Data Types</xref>.</t>
+        <t>This module augments <xref target="RFC8343">A YANG Data Model for
+        Interface Management </xref>, <xref target="RFC8349">YANG Routing
+        Management </xref>, and imports definitions from <xref
+        target="RFC6991">Common YANG Data Types</xref>.</t>
 
         <figure>
           <artwork><![CDATA[
@@ -150,26 +193,25 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-tree.txt)
 
 INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD.yang)
 
-<CODE ENDS>
-]]></artwork>
+<CODE ENDS>]]></artwork>
         </figure>
       </section>
     </section>
 
     <section anchor="IANA" title="IANA Considerations">
-      <t>This document registers ?? URIs and ?? YANG modules.</t>
+      <t>This document registers one URIs and one YANG module.</t>
 
       <section title="URI Registrations">
-        <t/>
+        <t>URI: urn:ietf:params:xml:ns:yang:ietf-babel</t>
       </section>
 
       <section title="YANG Module Name Registration">
-        <t>This document registers ?? YANG module in the YANG Module Names
+        <t>This document registers one YANG module in the YANG Module Names
         registry <xref target="RFC6020">YANG</xref>.</t>
 
         <figure>
-          <artwork><![CDATA[name:
-namespace: urn:ietf:params:xml:ns:yang:
+          <artwork><![CDATA[Name:ietf-babel
+Namespace: urn:ietf:params:xml:ns:yang:ietf-babel
 prefix: babel
 reference: RFC XXXX ]]></artwork>
         </figure>
@@ -184,7 +226,7 @@ reference: RFC XXXX ]]></artwork>
       transport layer and the mandatory-to-implement secure transport is <xref
       target="RFC6242">SSH</xref>. The lowest RESTCONF layer is HTTPS, and the
       mandatory-to-implement secure transport is <xref
-      target="RFC5246">TLS</xref>.</t>
+      target="RFC8446">TLS</xref>.</t>
 
       <t>The NETCONF Access Control Model (<xref target="RFC8341">NACM</xref>)
       provides the means to restrict access for particular NETCONF users to a
@@ -192,14 +234,14 @@ reference: RFC XXXX ]]></artwork>
       content.</t>
 
       <t>There are a number of data nodes defined in the YANG module which are
-      writable/creatable/deletable (i.e., config true, which is the default).
+      writable/created/deleted (i.e., config true, which is the default).
       These data nodes may be considered sensitive or vulnerable in some
       network environments. Write operations (e.g., &lt;edit-config&gt;) to
       these data nodes without proper protection can have a negative effect on
       network operations.</t>
 
-      <t>These are the subtrees and data nodes and their sensitivity/
-      vulnerability:</t>
+      <t>These are the subtrees and data nodes and their
+      sensitivity/vulnerability:</t>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
@@ -217,12 +259,14 @@ reference: RFC XXXX ]]></artwork>
 
       <?rfc include="reference.RFC.8174"?>
 
+      <?rfc include='reference.RFC.8343'?>
+
+      <?rfc include='reference.RFC.8349'?>
+
       <?rfc include="reference.I-D.ietf-babel-rfc6126bis"?>
     </references>
 
     <references title="Informative References">
-      <?rfc include="reference.RFC.5246"?>
-
       <?rfc include="reference.RFC.6020"?>
 
       <?rfc include="reference.RFC.6241"?>
@@ -234,6 +278,10 @@ reference: RFC XXXX ]]></artwork>
       <?rfc include="reference.RFC.8340"?>
 
       <?rfc include="reference.RFC.8341"?>
+
+      <?rfc include='reference.RFC.8342'?>
+
+      <?rfc include="reference.RFC.8446"?>
 
       <?rfc include="reference.I-D.ietf-babel-information-model"?>
     </references>
