@@ -234,18 +234,10 @@ module ietf-babel {
       key "prefix";
 
       leaf prefix {
-	type inet:ip-address;
-	description
-	  "Prefix (expressed in IP address format) for which this
-           route is advertised.";
-	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.6.";
-      }
-
-      leaf prefix-length {
 	type inet:ip-prefix;
 	description
-	  "Length of the prefix for which this route is advertised.";
+	  "Prefix (expressed in ip-address/prefix-length format) for
+           which this route is advertised.";
 	reference
 	  "RFC ZZZZ, Babel Information Model, Section 3.6.";
       }
