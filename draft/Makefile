@@ -53,7 +53,7 @@ ifeq (org,$(draft_type))
 	-rm -f $(draft).xml
 endif
 
-$(next).xml: $(draft).xml 
+$(next).xml: $(draft).xml ../src/yang/ietf-babel.yang
 	sed -e"s/$(basename $<)-latest/$(basename $@)/" -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" $< > $@
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-babel.yang > ../src/yang/ietf-babel\@$(shell date +%Y-%m-%d).yang
 	cd ../src; ./validate-and-gen-trees.sh; cd ..;

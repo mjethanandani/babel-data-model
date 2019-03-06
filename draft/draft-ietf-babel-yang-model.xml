@@ -65,7 +65,7 @@
       </address>
     </author>
 
-    <date day="28" month="February" year="2019"/>
+    <date day="5" month="March" year="2019"/>
 
     <area>Routing Area</area>
 
@@ -101,18 +101,25 @@
       target="I-D.ietf-babel-information-model">Babel Information Model
       </xref>.</t>
 
-      <t>Artwork in this document contains shorthand references to drafts in
-      progress. Please apply the following replacements and remove this note
-      before publication.</t>
+      <section title="Note to RFC Editor">
+        <t>Artwork in this document contains shorthand references to drafts in
+        progress. Please apply the following replacements and remove this note
+        before publication.</t>
 
-      <t><list style="symbols">
-          <t>"XXXX" --&gt; the assigned RFC value for this draft both in this
-          draft and in the YANG models under the revision statement.</t>
+        <t><list style="symbols">
+            <t>"XXXX" --&gt; the assigned RFC value for this draft both in
+            this draft and in the YANG models under the revision
+            statement.</t>
 
-          <t>Revision date in model, in the format YYYY-MM-DD needs to get
-          updated with the date the draft gets approved. The date also needs
-          to get reflected on the line with &lt;CODE BEGINS&gt;.</t>
-        </list></t>
+            <t>"ZZZZ" --&gt; the assigned RFC value for <xref
+            target="I-D.ietf-babel-information-model">Babel Information Model
+            </xref></t>
+
+            <t>Revision date in model, in the format YYYY-MM-DD needs to get
+            updated with the date the draft gets approved. The date also needs
+            to get reflected on the line with &lt;CODE BEGINS&gt;.</t>
+          </list></t>
+      </section>
 
       <section title="Definitions and Acronyms">
         <t><list style="symbols">
@@ -157,10 +164,15 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
         the route is advertised, a reference to the neighboring route, and
         next-hop address.</t>
 
-        <t>Finally, the security subtree for all interfaces describes security
-        objects such as the mechanism in use, whether security is enabled, and
-        credentials used by the router. Note, this security subtree is
-        separate from the security subtree at the interface level.</t>
+        <t>Finally, for security two subtree are defined. The hmac subtree
+        which refers to parameters related to HMAC security mechanism. The
+        boolean flag apply-all indicates whether HMAC mechanism is applicable
+        for all interfaces or just for interfaces listed in the leaf-list
+        'interfaces'. The dtls subtree refers to parameters related to DTLS
+        security mechanism. Similar to the HMAC mechanism, the boolean flag
+        apply-all indicates whether DTLS mechanism is applicable for all
+        interfaces or just for interfaces listed in the leaf-list
+        'interfaces'.</t>
       </section>
 
       <section title="YANG Module">
@@ -181,8 +193,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-tree.txt)
 
 INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD.yang)
 
-<CODE ENDS>
-]]></artwork>
+<CODE ENDS>]]></artwork>
         </figure>
       </section>
     </section>
@@ -191,7 +202,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD.yang)
       <t>This document registers one URIs and one YANG module.</t>
 
       <section title="URI Registrations">
-        <t/>
+        <t>URI: urn:ietf:params:xml:ns:yang:ietf-babel</t>
       </section>
 
       <section title="YANG Module Name Registration">
@@ -199,8 +210,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD.yang)
         registry <xref target="RFC6020">YANG</xref>.</t>
 
         <figure>
-          <artwork><![CDATA[name:
-namespace: urn:ietf:params:xml:ns:yang:
+          <artwork><![CDATA[Name:ietf-babel
+Namespace: urn:ietf:params:xml:ns:yang:ietf-babel
 prefix: babel
 reference: RFC XXXX ]]></artwork>
         </figure>
