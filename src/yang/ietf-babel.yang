@@ -383,7 +383,8 @@ module ietf-babel {
         type string;
         config false;
         description
-          "This is the version of the babel protocol implemented.";
+          "The name and version of this implementation of the Babel 
+           protocol.";
         reference
           "RFC ZZZZ, Babel Information Model, Section 3.1.";
       }
@@ -566,6 +567,7 @@ module ietf-babel {
           type identityref {
             base link-type;
           }
+	  default "ethernet";
           description
             "Indicates the type of link. Set of values of supported
              link types where the following enumeration values MUST
@@ -580,6 +582,7 @@ module ietf-babel {
 	  type identityref {
 	    base metric-comp-algorithms;
 	  }
+	  default "k-out-of-j";
 	  description
 	    "Indicates the metric computation algorithm used on this 
              interface. The value MUST be one of those listed in the
@@ -735,6 +738,7 @@ module ietf-babel {
 
           leaf txcost {
             type int32;
+	    default "0";
             description
               "Transmission cost value from the last IHU packet
                received from this neighbor, or maximum value
@@ -746,6 +750,7 @@ module ietf-babel {
 
           leaf exp-mcast-hello-seqno {
             type uint16;
+	    default "0";
             description
               "Expected multicast Hello sequence number of next Hello
                to be received from this neighbor; if multicast Hello
@@ -757,6 +762,7 @@ module ietf-babel {
 
           leaf exp-ucast-hello-seqno {
             type uint16;
+	    default "0";
             description
               "Expected unicast Hello sequence number of next Hello to
                be received from this neighbor; if unicast Hello
@@ -915,6 +921,7 @@ module ietf-babel {
 
 	leaf verify {
 	  type boolean;
+	  mandatory "true";
 	  description
 	    "A Boolean flag indicating whether HMAC hashes in incoming
              Babel packets are required to be present and are
@@ -926,6 +933,7 @@ module ietf-babel {
 
 	leaf apply-all {
 	  type boolean;
+	  mandatory "true";
 	  description
 	    "A Boolean flag indicating whether this babel-hmac
              instance is to be used for all interfaces. If 'true',
@@ -941,6 +949,7 @@ module ietf-babel {
 
 	leaf-list interfaces {
           type if:interface-ref;
+	  min-elements "1";
 	  description
             "List of references to the babel-interfaces entries this
              babel-hmac entry applies to. This parameter is ignored
@@ -953,9 +962,11 @@ module ietf-babel {
 
 	list hmac-keys {
 	  key "name";
+	  min-elements "1";
 	  
 	  leaf name {
 	    type string;
+	    mandatory "true";
 	    description
 	      "A unique name for this HMAC key that can be used to
                identify the key in this object instance, since the key
@@ -968,6 +979,7 @@ module ietf-babel {
 
 	  leaf use-sign {
 	    type boolean;
+	    mandatory "true";
 	    description
 	      "Indicates whether this key value is used to sign sent 
                Babel packets. Sent packets are signed using this key
@@ -979,6 +991,7 @@ module ietf-babel {
 
 	  leaf use-verify {
 	    type boolean;
+	    mandatory "true";
 	    description
 	      "Indicates whether this key value is used to verify
                incoming Babel packets. This key is used to verify
@@ -991,6 +1004,7 @@ module ietf-babel {
 
 	  leaf value {
 	    type binary;
+	    mandatory "true";
 	    description
 	      "The value of the HMAC key. An implementation MUST NOT
                allow this parameter to be read. This can be done by
@@ -1006,6 +1020,7 @@ module ietf-babel {
 	    input {
 	      leaf test-string {
 		type binary;
+		mandatory "true";
 		description
 		  "The test string on which this test has to be
                    performed.";
@@ -1014,6 +1029,7 @@ module ietf-babel {
 	    output {
 	      leaf resulting-hash {
 		type binary;
+		mandatory "true";
 		description
                   "An operation that allows the HMAC key and hash
                    algorithm to be tested to see if they produce an
@@ -1053,6 +1069,7 @@ module ietf-babel {
 
 	leaf apply-all {
 	  type boolean;
+	  mandatory "true";
 	  description
 	    "A Boolean flag indicating whether this babel-dtls 
              instance is to be used for all interfaces. If 'true',
@@ -1068,6 +1085,7 @@ module ietf-babel {
 
 	leaf-list interfaces {
 	  type if:interface-ref;
+	  min-elements "1";
 	  description
 	    "List of references to the babel-interfaces entries this 
              babel-dtls entry applies to. This parameter is ignored
@@ -1109,12 +1127,14 @@ module ietf-babel {
 
 	list certs {
 	  key "type";
-
+	  min-elements "1";
+	    
 	  // TODO: Check if the type of cert is unique, i.e. appears
 	  //       only once per type. If not, we need to define a
 	  //       key.
 	  leaf value {
 	    type string;
+	    mandatory "true";
 	    description
 	      "The DTLS certificate in PEM format [RFC7468]. This
                value can only be provided when this instance is
@@ -1127,6 +1147,7 @@ module ietf-babel {
 	    type identityref {
 	      base dtls-cert-types;
 	    }
+	    mandatory "true";
 	    description
 	      "The name of the certificate type of this object
                instance. The value MUST be the same as one of the
@@ -1139,6 +1160,7 @@ module ietf-babel {
 
 	  leaf private-key {
 	    type binary;
+	    mandatory "true";
 	    description
 	      "The value of the private key. If this is non-empty,
                this certificate can be used by this implementation to
@@ -1156,6 +1178,7 @@ module ietf-babel {
 	    input {
 	      leaf test-string {
 		type binary;
+		mandatory "true";
 		description
 		  "The test string on which this test has to be
                    performed.";
@@ -1164,6 +1187,7 @@ module ietf-babel {
 	    output {
 	      leaf resulting-hash {
 		type binary;
+		mandatory "true";
 		description
 		  "The output of this operation is a binary string,
                    and is the resulting hash computed using the
