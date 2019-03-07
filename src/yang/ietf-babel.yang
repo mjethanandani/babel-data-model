@@ -1118,12 +1118,15 @@ module ietf-babel {
 	}
 
 	list certs {
-	  key "type";
+	  key "name";
 	  min-elements "1";
 	    
-	  // TODO: Check if the type of cert is unique, i.e. appears
-	  //       only once per type. If not, we need to define a
-	  //       key.
+	  leaf name {
+	    type string;
+	    description
+	      "A unique name that identifies the cert in the list.";
+	  }
+
 	  leaf value {
 	    type string;
 	    mandatory "true";
