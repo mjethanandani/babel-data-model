@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <routing
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
+    <control-plane-protocols>
+      <control-plane-protocol>
+	<type
+	    xmlns:babel="urn:ietf:params:xml:ns:yang:ietf-babel">babel:babel
+	</type>
+	<name>name:babel</name>
+	<babel
+	    xmlns="urn:ietf:params:xml:ns:yang:ietf-babel">
+	  <enable>true</enable>
+	  <stats-enable>true</stats-enable>
+	</babel>
+      </control-plane-protocol>
+    </control-plane-protocols>
+  </routing>
+</config>
