@@ -149,12 +149,6 @@
         the implementation of this data module to make sure that the
         attributes that are marked read-only and are mandatory are indeed
         present.</t>
-
-        <t>The information model also states that some of the attributes can
-        be implemented as read-only. An example of this is babel-enable in the
-        babel-information-obj. Such an attribute is defined as read-write in
-        this data module because it believed to be a configurable
-        attribute.</t>
       </section>
 
       <section title="Tree Diagram">
@@ -182,15 +176,14 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
         the route is advertised, a reference to the neighboring route, and
         next-hop address.</t>
 
-        <t>Finally, for security two subtree are defined. The hmac subtree
-        which refers to parameters related to HMAC security mechanism. The
-        boolean flag apply-all indicates whether HMAC mechanism is applicable
-        for all interfaces or just for interfaces listed in the leaf-list
-        'interfaces'. The dtls subtree refers to parameters related to DTLS
+        <t>Finally, for security two subtree are defined to contain HMAC keys
+        and DTLS certificates. The hmac subtree contains keys used with the
+        HMAC security mechanism. The boolean flag babel-hmac-default-apply
+        indicates whether the set of HMAC keys is automatically applied to new
+        interfaces. The dtls subtree contains certificates used with DTLS
         security mechanism. Similar to the HMAC mechanism, the boolean flag
-        apply-all indicates whether DTLS mechanism is applicable for all
-        interfaces or just for interfaces listed in the leaf-list
-        'interfaces'.</t>
+        babel-dtls-default-apply indicates whether the set of DTLS
+        certificates is automatically applied to new interfaces.</t>
       </section>
 
       <section title="YANG Module">

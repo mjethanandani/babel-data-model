@@ -233,45 +233,35 @@ module ietf-babel {
 	  "RFC ZZZZ, Babel Information Model, Section 3.6.";
       }
 
-      choice metric {
-	mandatory "true";
-	leaf received-metric {
-	  type uint16;
-	  description
-	    "The metric with which this route was advertised by the
+      leaf received-metric {
+        type uint16;
+        description
+          "The metric with which this route was advertised by the
              neighbor, or maximum value (infinity) to indicate a the
              route was recently retracted and is temporarily
              unreachable. this metric will be 0 (zero) if the route
              was not received from a neighbor but was generated
              through other means. Either babel-route-calculated-metric
              or babel-route-received-metric MUST be provided.";
-	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.6,
+        reference
+          "RFC ZZZZ, Babel Information Model, Section 3.6,
              draft-ietf-babel-rfc6126bis, The Babel Routing Protocol,
              Section 3.5.5.";
-	}
+      }
 
-	leaf calculated-metric {
-	  type uint16;
-	  description
-	    "A calculated metric for this route. How the metric is
+      leaf calculated-metric {
+        type uint16;
+        description
+          "A calculated metric for this route. How the metric is
              calculated is implementation-specific. Maximum value
              (infinity) indicates the route was recently retracted
              and is temporarily unreachable. Either
              babel-route-calculated-metric or
              babel-route-received-metric MUST be provided.";
-	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.6,
+        reference
+          "RFC ZZZZ, Babel Information Model, Section 3.6,
              draft-ietf-babel-rfc6126bis, The Babel Routing Protocol,
              Section 3.5.5.";
-	}
-	description
-	  "Either babel-route-calculated-metric or
-           babel-route-received-metric MUST be provided.";
-	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.6,
-           draft-ietf-babel-rfc6126bis, The Babel Routing Protocol,
-           Section 3.5.5.";
       }
 
       leaf seqno {
