@@ -43,17 +43,17 @@ do
 done
 rm yang/*-tree.txt.tmp
 
-#echo "Validating examples"
+echo "Validating examples"
 
-#for i in yang/example-acl-configuration-*.xml
-#do
-#    name=$(echo $i | cut -f 1-3 -d '.')
-#    echo "Validating $name.xml"
-#    response=`yanglint -s -i -t auto -p ../../ yang/ietf-access-control-list\@$(date +%Y-%m-%d).yang $name.xml`
-#    if [ $? -ne 0 ]; then
-#       printf "failed (error code: $?)\n"
-#       printf "$response\n\n"
-#       echo
-#       exit 1
-#    fi
-#done
+for i in yang/example-babel-configuration-*.xml
+do
+    name=$(echo $i | cut -f 1-3 -d '.')
+    echo "Validating $name"
+    response=`yanglint -s -i -t auto -p ../../ yang/ietf-babel\@$(date +%Y-%m-%d).yang $name`
+    if [ $? -ne 0 ]; then
+       printf "failed (error code: $?)\n"
+       printf "$response\n\n"
+       echo
+       exit 1
+    fi
+done
