@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-ietf-babel-yang-model-02" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-babel-yang-model-03" ipr="trust200902">
   <front>
     <title abbrev="Babel YANG model">YANG Data Model for Babel</title>
 
@@ -65,7 +65,7 @@
       </address>
     </author>
 
-    <date day="22" month="July" year="2019"/>
+    <date day="22" month="August" year="2019"/>
 
     <area>Routing Area</area>
 
@@ -201,16 +201,6 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD.yang)
 <CODE ENDS>]]></artwork>
         </figure>
       </section>
-
-      <section title="Example">
-        <t>The following snippet demonstrates how this data module can be
-        configured. In this example, the routing protocol being configured is
-        Babel, and statistics gathering is enabled.<figure>
-            <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(../src/yang/example-babel-configuration-2.3.xml)
-]]></artwork>
-          </figure></t>
-      </section>
     </section>
 
     <section anchor="IANA" title="IANA Considerations">
@@ -302,7 +292,41 @@ reference: RFC XXXX ]]></artwork>
     </references>
 
     <section title="An Appendix">
-      <t/>
+      <t>This section is devoted to examples that demonstrate how Babel can be
+      configured.</t>
+
+      <section title="Statistics Gathering Enabled">
+        <t>In this example, interface eth0 is being configured for routing
+        protocol Babel, and statistics gathering is enabled.<figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/example-babel-configuration-2.3.xml)
+]]></artwork>
+          </figure></t>
+      </section>
+
+      <section title="Automatic Detection of Properties">
+        <t><figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/example-babel-configuration-2.4.xml)
+]]></artwork>
+          </figure></t>
+      </section>
+
+      <section title="Override Default Properties">
+        <t><figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/example-babel-configuration-2.5.xml)
+]]></artwork>
+          </figure></t>
+      </section>
+
+      <section title="Configuring other Properties">
+        <figure>
+          <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/example-babel-configuration-2.6.xml)
+]]></artwork>
+        </figure>
+      </section>
     </section>
   </back>
 </rfc>

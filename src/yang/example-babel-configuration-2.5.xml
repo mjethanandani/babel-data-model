@@ -1,0 +1,72 @@
+<!-- In this example, babeld is configured on three interfaces
+
+ interface eth0
+ interface eth1 type wireless
+ interface tun0 type tunnel
+
+ Here, interface eth1 is an Ethernet bridged to a wireless radio, so
+ babeld's autodetection fails, and the interface type needs to be
+ configured manually.  Tunnels are not detected automatically, so this
+ needs to be specified.
+
+ This is equivalent to the following:
+
+ interface eth0 metric-algorithm 2-out-of-3 split-horizon true
+ interface eth1 metric-algorithm etx split-horizon false
+ interface tun0 metric-algorithm 2-out-of-3 split-horizon true
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"
+	      xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">
+    <interface>
+      <name>eth0</name>
+      <type>ianaift:ethernetCsmacd</type>
+      <enabled>true</enabled>
+    </interface>
+    <interface>
+      <name>eth1</name>
+      <type>ianaift:ethernetCsmacd</type>
+      <enabled>true</enabled>
+    </interface>
+    <interface>
+      <name>tun0</name>
+      <type>ianaift:tunnel</type>
+      <enabled>true</enabled>
+    </interface>
+  </interfaces>
+  <routing
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
+    <control-plane-protocols>
+      <control-plane-protocol>
+	<type
+	    xmlns:babel="urn:ietf:params:xml:ns:yang:ietf-babel">babel:babel
+	</type>
+	<name>name:babel</name>
+	<babel
+	    xmlns="urn:ietf:params:xml:ns:yang:ietf-babel">
+	  <enable>true</enable>
+	  <interfaces>
+	    <reference>eth0</reference>
+	    <enable>true</enable>
+	    <metric-algorithm>two-out-of-three</metric-algorithm>
+	    <split-horizon>true</split-horizon>
+	  </interfaces>
+	  <interfaces>
+	    <reference>eth1</reference>
+	    <enable>true</enable>
+	    <metric-algorithm>etx</metric-algorithm>
+	    <split-horizon>false</split-horizon>
+	  </interfaces>
+	  <interfaces>
+	    <reference>tun0</reference>
+	    <enable>true</enable>
+	    <metric-algorithm>two-out-of-three</metric-algorithm>
+	    <split-horizon>true</split-horizon>
+	  </interfaces>
+	</babel>
+      </control-plane-protocol>
+    </control-plane-protocols>
+  </routing>
+</config>
