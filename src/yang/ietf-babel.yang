@@ -567,18 +567,6 @@ module ietf-babel {
 	    "RFC ZZZZ, Babel Information Model, Section 3.3.";
 	}
 
-	leaf mac-algorithm {
-	  type identityref {
-	    base mac-algorithms;
-	  }
-	  description
-	    "The name of the MAC algorithm used on this interface.
-             The value is one of the identities listed as part of
-             babel-mac-algorithms at a global level.";
-	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.3.";
-	}
-
 	leaf mac-verify {
 	  type boolean;
 	  description
