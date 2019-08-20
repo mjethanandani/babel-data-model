@@ -6,22 +6,22 @@ module ietf-babel {
   import ietf-yang-types {
     prefix yt;
     reference
-      "RFC 6991 - Common YANG Data Types.";
+      "RFC 6991: Common YANG Data Types.";
   }
   import ietf-inet-types {
     prefix inet;
     reference
-      "RFC 6991 - Common YANG Data Types.";
+      "RFC 6991: Common YANG Data Types.";
   }
   import ietf-interfaces {
     prefix if;
     reference
-      "RFC 8343 - A YANG Data Model for Interface Management";
+      "RFC 8343: A YANG Data Model for Interface Management";
   }
   import ietf-routing {
     prefix "rt";
     reference
-      "RFC 8349 - YANG Routing Management";
+      "RFC 8349: YANG Routing Management";
   }
 
   organization
@@ -56,41 +56,12 @@ module ietf-babel {
     description
       "Initial version.";
     reference
-      "RFC XXX: Babel YANG Data Model.";
+      "RFC XXXX: Babel YANG Data Model.";
   }
 
   /*
    * Identities
    */
-  identity link-property {
-    description
-      "Base identity from which all Babel Link Types are derived.";
-  }
-
-  identity other {
-    base "link-property";
-    description
-      "No link property information available.";
-  }
-
-  identity tunnel {
-    base "link-property";
-    description
-      "A tunneled interface over unknown physical link.";
-  }
-
-  identity wired {
-    base "link-property";
-    description
-      "A wired link with fixed physical properties.";
-  }
-
-  identity wireless {
-    base "link-property";
-    description
-      "Wireless link type for Babel Routing Protocol.";
-  }
-
   identity metric-comp-algorithms {
     description
       "Base identity from which all Babel metric comp algorithms
@@ -119,7 +90,7 @@ module ietf-babel {
   identity mac {
     base security-supported;
     description
-      "MAC supported.";
+      "Keyed MAC supported.";
   }
 
   identity dtls {
@@ -142,6 +113,9 @@ module ietf-babel {
     base mac-algorithms;
     description
       "HMAC-SHA256 algorithm supported.";
+    reference
+      "RFC 4868: Using HMAC-SHA-256, HMAC-SHA-384, and HMAC-SHA-512
+       with IPsec.";
   }
 
   identity blake2s {
@@ -149,7 +123,7 @@ module ietf-babel {
     description
       "BLAKE2s algorithm supported.";
     reference
-      "RFC 7693, The BLAKE2 Cryptographic Hash and Message 
+      "RFC 7693: The BLAKE2 Cryptographic Hash and Message 
        Authentication Code (MAC).";
   }
 
@@ -183,18 +157,6 @@ module ietf-babel {
   }
   
   /*
-   * Features
-   */
-
-  /*
-   * Features supported
-   */
-  
-  /*
-   * Typedefs
-   */
-
-  /*
    * Groupings
    */
   grouping routes {
@@ -208,7 +170,7 @@ module ietf-babel {
 	  "Prefix (expressed in ip-address/prefix-length format) for
            which this route is advertised.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.6.";
+	  "RFC ZZZZ: Babel Information Model, Section 3.6.";
       }
 
       leaf router-id {
@@ -217,7 +179,7 @@ module ietf-babel {
 	  "router-id of the source router for which this route is
            advertised.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.6.";
+	  "RFC ZZZZ: Babel Information Model, Section 3.6.";
       }
 
       leaf neighbor {
@@ -230,38 +192,39 @@ module ietf-babel {
 	  "Reference to the babel-neighbors entry for the neighbor
            that advertised this route.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.6.";
+	  "RFC ZZZZ: Babel Information Model, Section 3.6.";
       }
 
       leaf received-metric {
         type uint16;
         description
           "The metric with which this route was advertised by the
-             neighbor, or maximum value (infinity) to indicate a the
-             route was recently retracted and is temporarily
-             unreachable. this metric will be 0 (zero) if the route
-             was not received from a neighbor but was generated
-             through other means. Either babel-route-calculated-metric
-             or babel-route-received-metric MUST be provided.";
+           neighbor, or maximum value (infinity) to indicate a the
+           route was recently retracted and is temporarily
+           unreachable. This metric will be 0 (zero) if the route
+           was not received from a neighbor but was generated
+           through other means. At least one of
+           babel-route-calculated-metric or
+           babel-route-received-metric MUST be non-NULL.";
         reference
-          "RFC ZZZZ, Babel Information Model, Section 3.6,
-             draft-ietf-babel-rfc6126bis, The Babel Routing Protocol,
-             Section 3.5.5.";
+          "RFC ZZZZ: Babel Information Model, Section 3.6,
+           draft-ietf-babel-rfc6126bis: The Babel Routing Protocol,
+                                        Section 3.5.5.";
       }
 
       leaf calculated-metric {
         type uint16;
         description
           "A calculated metric for this route. How the metric is
-             calculated is implementation-specific. Maximum value
-             (infinity) indicates the route was recently retracted
-             and is temporarily unreachable. Either
-             babel-route-calculated-metric or
-             babel-route-received-metric MUST be provided.";
+           calculated is implementation-specific. Maximum value
+           (infinity) indicates the route was recently retracted
+           and is temporarily unreachable. At least one of
+           babel-route-calculated-metric or
+           babel-route-received-metric MUST be non-NULL.";
         reference
-          "RFC ZZZZ, Babel Information Model, Section 3.6,
-             draft-ietf-babel-rfc6126bis, The Babel Routing Protocol,
-             Section 3.5.5.";
+          "RFC ZZZZ: Babel Information Model, Section 3.6,
+           draft-ietf-babel-rfc6126bis: The Babel Routing Protocol,
+                                        Section 3.5.5.";
       }
 
       leaf seqno {
@@ -269,7 +232,7 @@ module ietf-babel {
 	description
 	  "The sequence number with which this route was advertised.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.6.";
+	  "RFC ZZZZ: Babel Information Model, Section 3.6.";
       }
 
       leaf next-hop {
@@ -278,7 +241,7 @@ module ietf-babel {
 	  "The next-hop address of this route. This will be empty if
            this route has no next-hop address.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.6.";
+	  "RFC ZZZZ: Babel Information Model, Section 3.6.";
       }
 
       leaf feasible {
@@ -286,7 +249,7 @@ module ietf-babel {
 	description
 	  "A boolean flag indicating whether this route is feasible.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.6,
+	  "RFC ZZZZ: Babel Information Model, Section 3.6,
            draft-ietf-babel-rfc6126bis, The Babel Routing Protocol,
            Section 3.5.1.";
       }
@@ -298,16 +261,16 @@ module ietf-babel {
            i.e., whether it is currently being used for forwarding and
            is being advertised.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.6.";
+	  "RFC ZZZZ: Babel Information Model, Section 3.6.";
       }
       description
 	"A set of babel-route-obj objects. Includes received and
          routes routes.";
       reference
-	"RFC ZZZZ, Babel Information Model, Section 3.1.";
+	"RFC ZZZZ: Babel Information Model, Section 3.1.";
     }
     description
-      "Common grouping for routing used in RIB augmentation.";
+      "Common grouping for routing used in RIB.";
   }
 
   /*
@@ -322,7 +285,8 @@ module ietf-babel {
          is of type 'babel'.";
     }
     description
-      "Augment the routing module to support features such as VRF.";
+      "Augment the routing module to support a common structure
+       between routing protocols.";
     reference
       "YANG Routing Management, RFC 8349, Lhotka & Lindem, March
        2018.";
@@ -337,7 +301,7 @@ module ietf-babel {
           "The name and version of this implementation of the Babel 
            protocol.";
         reference
-          "RFC ZZZZ, Babel Information Model, Section 3.1.";
+          "RFC ZZZZ: Babel Information Model, Section 3.1.";
       }
 
       leaf enable {
@@ -353,7 +317,7 @@ module ietf-babel {
            the protocol is actually running or not, i.e. it indicates
            the operational state of the protocol.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.1.";
+	  "RFC ZZZZ: Babel Information Model, Section 3.1.";
       }
 
       leaf router-id {
@@ -364,18 +328,19 @@ module ietf-babel {
            arbitrary string of 8 octets that is assumed to be unique
            across the routing domain";
         reference
-          "RFC ZZZZ, Babel Information Model, Section 3.1,
-           rfc6126bis, The Babel Routing Protocol. Section 3.";
+          "RFC ZZZZ: Babel Information Model, Section 3.1,
+           draft-ietf-babel-rfc6126bis: The Babel Routing Protocol,
+                                        Section 3.";
       }
 
-      leaf sequence-number {
+      leaf seqno {
 	type uint16;
 	config false;
 	description
 	  "Sequence number included in route updates for routes
          originated by this node.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.1.";
+	  "RFC ZZZZ: Babel Information Model, Section 3.1.";
       }
 
       leaf-list metric-comp-algorithms {
@@ -388,7 +353,7 @@ module ietf-babel {
           "List of cost compute algorithms supported by this
            implementation of Babel.";
         reference
-          "RFC ZZZZ, Babel Information Model, Section 3.1.";
+          "RFC ZZZZ: Babel Information Model, Section 3.1.";
       }
 
       leaf-list security-supported {
@@ -398,10 +363,9 @@ module ietf-babel {
 	config false;
 	min-elements 1;
         description
-          "Babel security mechanism used by this implementation or
-           per interface.";
+          "List of supported security mechanisms.";
         reference
-          "RFC ZZZZ, Babel Information Model, Section 3.1.";
+          "RFC ZZZZ: Babel Information Model, Section 3.1.";
       }
 
       leaf-list mac-algorithms {
@@ -413,7 +377,7 @@ module ietf-babel {
 	  "List of supported MAC computation algorithms. Possible
            values include 'HMAC-SHA256', 'BLAKE2s'.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.1.";
+	  "RFC ZZZZ: Babel Information Model, Section 3.1.";
       }	  
 
       leaf-list dtls-cert-types {
@@ -425,15 +389,14 @@ module ietf-babel {
 	  "List of supported DTLS certificate types. Possible values
            include 'X.509' and 'RawPublicKey'.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.1.";
+	  "RFC ZZZZ: Babel Information Model, Section 3.1.";
       }
 
       leaf stats-enable {
 	type boolean;
 	description
 	  "Indicates whether statistics collection is enabled (true)
-           or disabled (false) on all interfaces, including
-           neighbor-specific statistics (babel-nbr-stats).";
+           or disabled (false) on all interfaces.";
       }
       
       container constants {
@@ -444,7 +407,7 @@ module ietf-babel {
             "UDP port for sending and receiving Babel messages. The
              default port is 6696.";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.2.";
+            "RFC ZZZZ: Babel Information Model, Section 3.2.";
         }
 
 	leaf mcast-group {
@@ -454,12 +417,12 @@ module ietf-babel {
 	    "Multicast group for sending and receiving multicast
              announcements on IPv6.";
 	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.2.";
+	    "RFC ZZZZ: Babel Information Model, Section 3.2.";
 	}
 	description
 	  "Babel Constants object.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.1.";
+	  "RFC ZZZZ: Babel Information Model, Section 3.1.";
       }
 
       list interfaces {
@@ -477,7 +440,7 @@ module ietf-babel {
              be a string that indicates the interface name used by the
              underlying operating system.";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.3.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3.";
         }
 
 	leaf enable {
@@ -488,20 +451,20 @@ module ietf-babel {
              interface. If false, babel messages received on this
              interface are ignored and none are sent.";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.3.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3.";
 	}
 
 	leaf metric-algorithm {
 	  type identityref {
 	    base metric-comp-algorithms;
 	  }
-	  mandatory "true";
+	  mandatory true;
 	  description
             "Indicates the metric computation algorithm used on this
              interface. The value MUST be one of those listed in
              'metric-comp-algorithms'.";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.X.";
+            "RFC ZZZZ: Babel Information Model, Section 3.X.";
 	}
 
 	leaf split-horizon {
@@ -512,7 +475,7 @@ module ietf-babel {
              A value of true indicates split horizon optimization
              is used.";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.X.";
+            "RFC ZZZZ: Babel Information Model, Section 3.X.";
 	}
 
 	leaf mcast-hello-seqno {
@@ -520,18 +483,19 @@ module ietf-babel {
 	  config false;
 	  description
 	    "The current sequence number in use for multicast hellos
-           sent on this interface.";
+             sent on this interface.";
 	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.3.";
+	    "RFC ZZZZ: Babel Information Model, Section 3.3.";
 	}
 
         leaf mcast-hello-interval {
           type uint16;
+          units centiseconds;
           description
             "The current multicast hello interval in use for hellos
              sent on this interface.";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.3.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3.";
         }
 
 	leaf update-interval {
@@ -541,7 +505,7 @@ module ietf-babel {
 	    "The current update interval in use for this interface.
              Units are centiseconds.";
 	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.3.";
+	    "RFC ZZZZ: Babel Information Model, Section 3.3.";
 	}
 
         leaf mac-enable {
@@ -550,7 +514,7 @@ module ietf-babel {
             "Indicates whether the MAC security mechanism is enabled
              (true) or disabled (false).";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.3.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3.";
         }
 
 	leaf-list mac-key-sets {
@@ -564,7 +528,7 @@ module ietf-babel {
              babel-mac-default-apply 'true' will be included in this
              list.";
 	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.3.";
+	    "RFC ZZZZ: Babel Information Model, Section 3.3.";
 	}
 
 	leaf mac-verify {
@@ -575,7 +539,7 @@ module ietf-babel {
              are verified.  If this parameter is 'true', incoming
              packets are required to have a valid MAC hash.";
 	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.3.";
+	    "RFC ZZZZ: Babel Information Model, Section 3.3.";
 	}
 
         leaf dtls-enable {
@@ -584,7 +548,7 @@ module ietf-babel {
             "Indicates whether the DTLS security mechanism is enabled
              (true) or disabled (false).";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.3.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3.";
         }
 
 	leaf-list dtls-certs {
@@ -598,7 +562,7 @@ module ietf-babel {
              babel-dtls-default-apply 'true' will be included in
              this list.";
 	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.3.";
+	    "RFC ZZZZ: Babel Information Model, Section 3.3.";
 	}
 
 	leaf dtls-cached-info {
@@ -608,7 +572,7 @@ module ietf-babel {
              in ClientHello and ServerHello packets. The extension
              is included if the value is 'true'.";
 	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.3.";
+	    "RFC ZZZZ: Babel Information Model, Section 3.3.";
 	}
 
 	leaf-list dtls-cert-prefer {
@@ -627,7 +591,7 @@ module ietf-babel {
              babel-cert-private-key will be used to populate the
              client_certificate_type extension in a Client Hello.";
 	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.3.";
+	    "RFC ZZZZ: Babel Information Model, Section 3.3.";
 	}
 
         leaf packet-log-enable {
@@ -637,7 +601,7 @@ module ietf-babel {
              interface is enabled; if false, babel packets are not
              logged.";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.3.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3.";
 	}
 
         leaf packet-log {
@@ -651,7 +615,7 @@ module ietf-babel {
              packet log files. Logging is enabled / disabled by
              packet-log-enable.";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.3.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3.";
         }
 
 	container stats {
@@ -662,7 +626,7 @@ module ietf-babel {
 	      "A count of the number of multicast Hello packets sent
                on this interface.";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.4.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.4.";
 	  }
 
 	  leaf sent-mcast-update {
@@ -671,7 +635,7 @@ module ietf-babel {
 	      "A count of the number of multicast update packets sent
                on this interface.";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.4.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.4.";
 	  }
 
           leaf sent-ucast-hello {
@@ -680,7 +644,7 @@ module ietf-babel {
               "A count of the number of unicast Hello packets sent
                to this neighbor.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.6.";
+              "RFC ZZZZ: Babel Information Model, Section 3.6.";
           }
 
           leaf sent-ucast-update {
@@ -689,7 +653,7 @@ module ietf-babel {
               "A count of the number of unicast update packets sent
                to this neighbor.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.6.";
+              "RFC ZZZZ: Babel Information Model, Section 3.6.";
           }
 
           leaf sent-ihu {
@@ -698,7 +662,7 @@ module ietf-babel {
               "A count of the number of IHU packets sent to this
                neighbor.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.6.";
+              "RFC ZZZZ: Babel Information Model, Section 3.6.";
           }
 
           leaf received-packets {
@@ -707,7 +671,7 @@ module ietf-babel {
 	      "A count of the number of Babel packets received on
                this interface.";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.4.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.4.";
 	  }
 	  action reset {
 	    input {
@@ -728,7 +692,7 @@ module ietf-babel {
 	  description
 	    "Statistics collection object for this interface.";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.3.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3.";
 	}
 
 	list neighbor-objects {
@@ -740,7 +704,7 @@ module ietf-babel {
 	    description
 	      "IPv4 or v6 address the neighbor sends packets from.";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.5.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.5.";
 	  }
 
           leaf hello-mcast-history {
@@ -756,7 +720,7 @@ module ietf-babel {
                utf-8 encoded hex digits where a '1' bit = Hello
                received and a '0' bit = Hello not received.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.5.";
+              "RFC ZZZZ: Babel Information Model, Section 3.5.";
           }
 
           leaf hello-ucast-history {
@@ -772,7 +736,7 @@ module ietf-babel {
                utf-8 encoded hex digits where a '1' bit = Hello
                received and a '0' bit = Hello not received.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.5.";
+              "RFC ZZZZ: Babel Information Model, Section 3.5.";
           }
 
           leaf txcost {
@@ -781,10 +745,10 @@ module ietf-babel {
             description
               "Transmission cost value from the last IHU packet
                received from this neighbor, or maximum value
-               (infinity) to indicates the IHU hold timer for this
+               (infinity) to indicate the IHU hold timer for this
                neighbor has expired description.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.5.";
+              "RFC ZZZZ: Babel Information Model, Section 3.5.";
           }
 
           leaf exp-mcast-hello-seqno {
@@ -794,9 +758,9 @@ module ietf-babel {
               "Expected multicast Hello sequence number of next Hello
                to be received from this neighbor; if multicast Hello
                packets are not expected, or processing of multicast
-               packets is not enabled, this MUST be 0.";
+               packets is not enabled, this MUST be NULL.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.5.";
+              "RFC ZZZZ: Babel Information Model, Section 3.5.";
           }
 
           leaf exp-ucast-hello-seqno {
@@ -806,9 +770,9 @@ module ietf-babel {
               "Expected unicast Hello sequence number of next Hello to
                be received from this neighbor; if unicast Hello
                packets are not expected, or processing of unicast
-               packets is not enabled, this MUST be 0.";
+               packets is not enabled, this MUST be NULL.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.5.";
+              "RFC ZZZZ: Babel Information Model, Section 3.5.";
           }
 
 	  leaf ucast-hello-seqno {
@@ -819,7 +783,7 @@ module ietf-babel {
                packets are not expected, or processing of unicast
                packets is not enabled, this MUST be 0.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.5.";
+              "RFC ZZZZ: Babel Information Model, Section 3.5.";
 	  }
 
 	  leaf ucast-hello-interval {
@@ -829,7 +793,7 @@ module ietf-babel {
 	      "The current interval in use for unicast hellos sent to
                this neighbor. Units are centiseconds.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.5.";
+              "RFC ZZZZ: Babel Information Model, Section 3.5.";
 	  }
 	  
           leaf rxcost {
@@ -841,7 +805,7 @@ module ietf-babel {
                by the link layer. The rxcost is sent to a neighbor in
                each IHU.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.5.";
+              "RFC ZZZZ: Babel Information Model, Section 3.5.";
           }
 
           leaf cost {
@@ -852,17 +816,17 @@ module ietf-babel {
                table about the reception of Hellos, and the txcost
                computed from received IHU packets.";
             reference
-              "RFC ZZZZ, Babel Information Model, Section 3.5.";
+              "RFC ZZZZ: Babel Information Model, Section 3.5.";
           }
           description
             "A set of Babel Neighbor Object.";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.5.";
+            "RFC ZZZZ: Babel Information Model, Section 3.5.";
         }
         description
           "A set of Babel Interface objects.";
         reference
-          "RFC ZZZZ, Babel Information Model, Section 3.3.";
+          "RFC ZZZZ: Babel Information Model, Section 3.3.";
       }
 
       list mac {
@@ -885,7 +849,7 @@ module ietf-babel {
              If 'false', this instance is not applied to new
              babel-interfaces instances when they are created.";
 	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.7.";
+	    "RFC ZZZZ: Babel Information Model, Section 3.7.";
 	}
 
 	list keys {
@@ -894,7 +858,7 @@ module ietf-babel {
 	  
 	  leaf name {
 	    type string;
-	    mandatory "true";
+	    mandatory true;
 	    description
 	      "A unique name for this MAC key that can be used to
                identify the key in this object instance, since the key
@@ -902,24 +866,24 @@ module ietf-babel {
                provided when this instance is created, and is not
                subsequently writable.";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.8.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.8.";
 	  }
 
 	  leaf use-sign {
 	    type boolean;
-	    mandatory "true";
+	    mandatory true;
 	    description
 	      "Indicates whether this key value is used to sign sent 
                Babel packets. Sent packets are signed using this key
                if the value is 'true'. If the value is 'false', this
                key is not used to sign sent Babel packets.";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.8.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.8.";
 	  }
 
 	  leaf use-verify {
 	    type boolean;
-	    mandatory "true";
+	    mandatory true;
 	    description
 	      "Indicates whether this key value is used to verify
                incoming Babel packets. This key is used to verify
@@ -927,21 +891,36 @@ module ietf-babel {
                is 'false', no MAC is computed from this key for
                comparing an incoming packet.";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.8.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.8.";
 	  }
 
 	  leaf value {
 	    type binary;
-	    mandatory "true";
+	    mandatory true;
 	    description
 	      "The value of the MAC key. An implementation MUST NOT
                allow this parameter to be read. This can be done by
                always providing an empty string, or through
                permissions, or other means. This value MUST be
                provided when this instance is created, and is not
-               subsequently writable.";
+               subsequently writable.
+
+               This value is of a length suitable for the associated
+               babel-mac-key-algorithm. If the algorithm is based on
+               the HMAC construction [RFC2104], the length MUST be
+               between 0 and the block size of the underlying hash
+               inclusive (where 'HMAC-SHA256' block size is 64
+               bytes as described in [RFC4868]). If the algorithm
+               is 'BLAKE2s', the length MUST be between 0 and 32
+               bytes inclusive, as described in [RFC7693].";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.8.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.8,
+               RFC 2104: HMAC: Keyed-Hashing for Message
+                         Authentication
+               RFC 4868: Using HMAC-SHA-256, HMAC-SHA-384, and
+                         HMAC-SHA-512 with IPsec,
+               RFC 7693: The BLAKE2 Cryptographic Hash and Message
+                         Authentication Code (MAC).";
 	  }
 
           leaf algorithm {
@@ -953,14 +932,14 @@ module ietf-babel {
                value MUST be the same as one of the enumerations
                listed in the babel-mac-algorithms parameter.";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.8.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.8.";
 	  }
 
 	  action test {
 	    input {
 	      leaf test-string {
 		type binary;
-		mandatory "true";
+		mandatory true;
 		description
 		  "The test string on which this test has to be
                    performed.";
@@ -969,7 +948,7 @@ module ietf-babel {
 	    output {
 	      leaf resulting-hash {
 		type binary;
-		mandatory "true";
+		mandatory true;
 		description
                   "An operation that allows the MAC key and hash
                    algorithm to be tested to see if they produce an
@@ -980,21 +959,21 @@ module ietf-babel {
                    The output of this operation is the resulting hash,
                    as a binary string.";
 		reference
-		  "RFC ZZZZ, Babel Information Model, Section 3.8.";
+		  "RFC ZZZZ: Babel Information Model, Section 3.8.";
 	      }
 	    }
           }
 	  description
 	    "A set of babel-mac-keys-obj objects.";
 	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.8.";
+	    "RFC ZZZZ: Babel Information Model, Section 3.8.";
 	}
 	description
 	  "A babel-mac-obj object. If this object is implemented, it
            provides access to parameters related to the MAC security
            mechanism.";
         reference
-          "RFC ZZZZ, Babel Information Model, Section 3.7.";
+          "RFC ZZZZ: Babel Information Model, Section 3.7.";
       }
 
       list dtls {
@@ -1003,13 +982,12 @@ module ietf-babel {
 	leaf name {
 	  type string;
 	  description
-	    "TODO: This attribute does not exist in the model, but is 
-             needed for this model to work.";
+	    "A string that uniquely identifies a dtls object.";
 	}
 
 	leaf default-apply {
 	  type boolean;
-	  mandatory "true";
+	  mandatory true;
 	  description
 	    "A Boolean flag indicating whether this babel-dtls
              instance is applied to all new interfaces, by default. If
@@ -1019,7 +997,7 @@ module ietf-babel {
              this instance is not applied to new babel-interfaces
              instances when they are created.";
           reference
-            "RFC ZZZZ, Babel Information Model, Section 3.9.";
+            "RFC ZZZZ: Babel Information Model, Section 3.9.";
 	}
 
 	list certs {
@@ -1029,25 +1007,32 @@ module ietf-babel {
 	  leaf name {
 	    type string;
 	    description
-	      "A unique name that identifies the cert in the list.";
+	      "A unique name for this DTLS certificate that can be
+               used to identify the certificate in this object
+               instance, since the value is too long to be useful
+               for identification. This value MUST NOT be empty
+               and can only be provided when this instance is created
+               (i.e., it is not subsequently writable).";
+	    reference
+	      "RFC ZZZZ: Babel Information Model, Section 3.10.";
 	  }
 
 	  leaf value {
 	    type string;
-	    mandatory "true";
+	    mandatory true;
 	    description
 	      "The DTLS certificate in PEM format [RFC7468]. This
                value can only be provided when this instance is
                created, and is not subsequently writable.";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.10.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.10.";
 	  }
 
 	  leaf type {
 	    type identityref {
 	      base dtls-cert-types;
 	    }
-	    mandatory "true";
+	    mandatory true;
 	    description
 	      "The name of the certificate type of this object
                instance. The value MUST be the same as one of the
@@ -1055,12 +1040,12 @@ module ietf-babel {
                parameter. This value can only be provided when this
                instance is created, and is not subsequently writable.";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.10.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.10.";
 	  }
 
 	  leaf private-key {
 	    type binary;
-	    mandatory "true";
+	    mandatory true;
 	    description
 	      "The value of the private key. If this is non-empty,
                this certificate can be used by this implementation to
@@ -1071,14 +1056,14 @@ module ietf-babel {
                value can only be provided when this instance is
                created, and is not subsequently writable.";
 	    reference
-	      "RFC ZZZZ, Babel Information Model, Section 3.10.";
+	      "RFC ZZZZ: Babel Information Model, Section 3.10.";
 	  }
 
 	  action test {
 	    input {
 	      leaf test-string {
 		type binary;
-		mandatory "true";
+		mandatory true;
 		description
 		  "The test string on which this test has to be
                    performed.";
@@ -1087,7 +1072,7 @@ module ietf-babel {
 	    output {
 	      leaf resulting-hash {
 		type binary;
-		mandatory "true";
+		mandatory true;
 		description
 		  "The output of this operation is a binary string,
                    and is the resulting hash computed using the
@@ -1104,19 +1089,19 @@ module ietf-babel {
              can be presented by this implementation for
              authentication.";
 	  reference
-	    "RFC ZZZZ, Babel Information Model, Section 3.10.";
+	    "RFC ZZZZ: Babel Information Model, Section 3.10.";
 	}
 	description
 	  "A babel-dtls-obj object. If this object is implemented,
            it provides access to parameters related to the DTLS
            security mechanism.";
 	reference
-	  "RFC ZZZZ, Babel Information Model, Section 3.9";
+	  "RFC ZZZZ: Babel Information Model, Section 3.9";
       }
       description
         "Babel Information Objects.";
       reference
-        "RFC ZZZZ, Babel Information Model, Section 3.";
+        "RFC ZZZZ: Babel Information Model, Section 3.";
 
       uses routes;
     }
