@@ -1,3 +1,13 @@
+<!-- In this example, babeld is configured on two interfaces
+   
+   interface eth0
+   interface wlan0
+
+   This says to run Babel on interfaces eth0 and wlan0.  Babeld will
+   automatically detect that eth0 is wired and wlan0 is wireless, and
+   will configure the right parameters automatically.
+-->
+
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
   <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"
@@ -5,6 +15,11 @@
     <interface>
       <name>eth0</name>
       <type>ianaift:ethernetCsmacd</type>
+      <enabled>true</enabled>
+    </interface>
+    <interface>
+      <name>wlan0</name>
+      <type>ianaift:ieee80211</type>
       <enabled>true</enabled>
     </interface>
   </interfaces>
@@ -21,10 +36,16 @@
 	  <enable>true</enable>
 	  <interfaces>
 	    <reference>eth0</reference>
+	    <enable>true</enable>
 	    <metric-algorithm>two-out-of-three</metric-algorithm>
 	    <split-horizon>true</split-horizon>
 	  </interfaces>
-	  <stats-enable>true</stats-enable>
+	  <interfaces>
+	    <reference>wlan0</reference>
+	    <enable>true</enable>
+	    <metric-algorithm>etx</metric-algorithm>
+	    <split-horizon>false</split-horizon>
+	  </interfaces>
 	</babel>
       </control-plane-protocol>
     </control-plane-protocols>
