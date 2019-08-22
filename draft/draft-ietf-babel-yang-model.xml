@@ -121,10 +121,6 @@
           </list></t>
       </section>
 
-      <section title="Definitions and Acronyms">
-        <t/>
-      </section>
-
       <section title="Tree Diagram Annotations">
         <t>For a reference to the annotations used in tree diagrams included
         in this draft, please see <xref target="RFC8340">YANG Tree
@@ -165,8 +161,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
 
         <t>The interfaces subtree describes attributes such as interface
         object that is being referenced, the type of link as enumerated by
-        Babel Link Properties, and whether the interface is enabled or
-        not.</t>
+        metric-algorithm and split-horizon and whether the interface is
+        enabled or not.</t>
 
         <t>The constants subtree describes the UDP port used for sending and
         receiving Babel messages, and the multicast group used to send and
@@ -199,7 +195,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
         target="RFC7693">The Blake2 Cryptographic Hash and Message
         Authentication Code (MAC)</xref>, <xref
         target="I-D.ietf-babel-information-model">Babel Information
-        Model</xref>, <xref target="I-D.ietf-babel-rfc6126bis">The Babel
+        Model</xref>, and <xref target="I-D.ietf-babel-rfc6126bis">The Babel
         Routing Protocol</xref>.</t>
 
         <figure>
@@ -257,42 +253,42 @@ reference: RFC XXXX ]]></artwork>
       sensitivity/vulnerability from a config true perspective:</t>
 
       <t>babel: This container includes an "enable" parameter that can be used
-      to enable or disable use of Babel on a router </t>
+      to enable or disable use of Babel on a router</t>
 
       <t>babel/constants: This container includes configuration parameters
-      that can prevent reachability if misconfigured. </t>
+      that can prevent reachability if misconfigured.</t>
 
       <t>babel/interfaces: This leaf-list has configuration parameters that
       can enable/disable security mechanisms and change performance
-      characteristics of the Babel protocol. </t>
+      characteristics of the Babel protocol.</t>
 
       <t>babel/hmac and babel/dtls: These contain security credentials that
-      influence whether packets are trusted. </t>
+      influence whether packets are trusted.</t>
 
       <t>Some of the readable data or config false nodes in this YANG module
       may be considered sensitive or vulnerable in some network environments.
       It is thus important to control read access (e.g., via get, get-config,
       or notification) to these data nodes. These are the subtrees and data
       nodes and their sensitivity/vulnerability from a config false
-      perpective: </t>
+      perpective:</t>
 
       <t>babel: Access to the information in the various nodes can disclose
       the network topology. Additionally, the routes used by a network device
       may be used to mount a subsequent attack on traffic traversing the
-      network device. </t>
+      network device.</t>
 
       <t>babel/hmac and babel/dtls: These contain security credentials,
-      include private credentials of the router. </t>
+      include private credentials of the router.</t>
 
       <t>Some of the RPC operations in this YANG module may be considered
       sensitive or vulnerable in some network environments. It is thus
       important to control access to these operations. These are the
       operations and their sensitivity/vulnerability from a RPC operation
-      perspective: </t>
+      perspective:</t>
 
       <t>babel/hmac/hmac/keys/test and babel/dtls/certs/test: These can be
       used in a brute force attack to identify the credentials being used to
-      secure the Babel protocol. </t>
+      secure the Babel protocol.</t>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">

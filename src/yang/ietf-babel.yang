@@ -431,14 +431,8 @@ module ietf-babel {
         leaf reference {
           type if:interface-ref;
           description
-            "Reference to an interface object as defined by the data
-             model (e.g., YANG, BBF TR-181); data model is assumed to
-             allow for referencing of interface objects which may be at
-             any layer (physical, Ethernet MAC, IP, tunneled IP, etc.).
-             Referencing syntax will be specific to the data model. If
-             there is no set of interface objects available, this should
-             be a string that indicates the interface name used by the
-             underlying operating system.";
+            "References the name of the interface over which Babel
+             packets are sent and received.";
           reference
             "RFC ZZZZ: Babel Information Model, Section 3.3.";
         }
@@ -674,7 +668,14 @@ module ietf-babel {
 	      "RFC ZZZZ: Babel Information Model, Section 3.4.";
 	  }
 	  action reset {
-	    input {
+	    description
+              "The information model [RFC ZZZZ] defines this reset
+               action as a system-wide reset of Babel statistics
+               parameters, but in YANG the reset action has to be
+               contained in the container where the action needs to
+               be performed.";
+
+            input {
 	      leaf reset-at {
 		type yt:date-and-time;
 		description
