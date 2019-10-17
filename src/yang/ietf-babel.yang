@@ -472,7 +472,7 @@ module ietf-babel {
           description
             "Indicates the metric computation algorithm used on this
              interface. The value MUST be one of those identities
-             based 'metric-comp-algorithms'.";
+             based on 'metric-comp-algorithms'.";
           reference
             "RFC ZZZZ: Babel Information Model, Section 3.X.";
         }
@@ -590,14 +590,14 @@ module ietf-babel {
           ordered-by user;
           description
             "List of supported certificate types, in order of
-             preference. The values MUST be among those listed in the
-             types parameter in the list of certs under dtls. This
-             list is used to populate the server_certificate_type
-             extension in a Client Hello. Values that are present
-             in at least one instance in the certs object under dtls 
-             of a referenced dtls instance and that have a non-empty
-             private-key will be used to populate the
-             client_certificate_type extension in a Client Hello.";
+             preference. The values MUST be among those listed in
+             dtls-cert-types. This list is used to populate the
+             server_certificate_type extension in a Client Hello.
+             Values that are present in at least one instance in the
+             certs object under dtls of a referenced dtls instance
+             and that have a non-empty private-key will be used to
+             populate the client_certificate_type extension in a
+             Client Hello.";
           reference
             "RFC ZZZZ: Babel Information Model, Section 3.3.";
         }
@@ -618,7 +618,7 @@ module ietf-babel {
           description
             "A reference or url link to a file that contains a
              timestamped log of packets received and sent on
-             udp port on this interface. The [libpcap] file
+             udp-port on this interface. The [libpcap] file
              format with .pcap file extension SHOULD be supported for
              packet log files. Logging is enabled / disabled by
              packet-log-enable.";
@@ -691,7 +691,7 @@ module ietf-babel {
 	    description
               "The information model [RFC ZZZZ] defines reset
                action as a system-wide reset of Babel statistics.
-               In YANG the reset action is associated with
+               In YANG the reset action is associated with the
                container where the action is defined. In this case
                the action is associated with the stats container
                inside an interface. The action will therefore 
