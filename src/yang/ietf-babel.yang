@@ -68,6 +68,21 @@ module ietf-babel {
   }
 
   /*
+   * Features
+   */
+  feature two-out-of-three-supported {
+    description
+      "This implementation can support two-out-of-three metric
+       comp algorithm.";
+  }
+
+  feature etx-supported {
+    description
+      "This implementation can support Expected Transmission Count
+       (ETX) metric comp algorithm.";
+  }
+
+  /*
    * Identities
    */
   identity metric-comp-algorithms {
@@ -75,13 +90,17 @@ module ietf-babel {
       "Base identity from which all Babel metric comp algorithms
        are derived.";
   }
+
   identity two-out-of-three {
     base "metric-comp-algorithms";
+    if-feature two-out-of-three-supported;
     description
       "2-out-of-3 algorithm.";
   }
+
   identity etx {
     base "metric-comp-algorithms";
+    if-feature etx-supported;
     description
       "Expected Transmission Count.";
   }
