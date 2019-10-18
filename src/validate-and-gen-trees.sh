@@ -5,9 +5,9 @@ do
     name=$(echo $i | cut -f 1 -d '.')
     echo "Validating $name.yang"
     if test "${name#^example}" = "$name"; then
-        response=`pyang --lint --strict --canonical -p ../ -f tree --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
+        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -f tree --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
     else
-        response=`pyang --ietf --strict --canonical -p ../ -f tree --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
+        response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -f tree --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
     fi
     if [ $? -ne 0 ]; then
         printf "$name.yang failed pyang validation\n"
@@ -20,9 +20,9 @@ do
 
     echo "Generating abridged tree for $name.yang"
     if test "${name#^example}" = "$name"; then
-        response=`pyang --lint --strict --canonical -p ../ -f tree --max-line-length=72 --tree-line-length=69 --tree-depth=2 $name.yang > $name-abridged-tree.txt.tmp`
+        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -f tree --max-line-length=72 --tree-line-length=69 --tree-depth=2 $name.yang > $name-abridged-tree.txt.tmp`
     else            
-        response=`pyang --ietf --strict --canonical -p ../ -f tree --max-line-length=72 --tree-line-length=69 --tree-depth=2 $name.yang > $name-abridged-tree.txt.tmp`
+        response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -f tree --max-line-length=72 --tree-line-length=69 --tree-depth=2 $name.yang > $name-abridged-tree.txt.tmp`
     fi
     if [ $? -ne 0 ]; then
         printf "$name.yang failed pyang abridged tree generation.\n"
@@ -33,7 +33,7 @@ do
     fi
     fold -w 71 $name-abridged-tree.txt.tmp > $name-abridged-tree.txt
 
-    response=`yanglint -p ../../ $name.yang`
+    response=`yanglint -p ../../iana/yang-parameters $name.yang`
     if [ $? -ne 0 ]; then
         printf "$name.yang failed yanglint validation\n"
         printf "$response\n\n"
