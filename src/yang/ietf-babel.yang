@@ -46,7 +46,7 @@ module ietf-babel {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.
 
-     Copyright (c) 2019 IETF Trust and the persons identified as
+     Copyright (c) 2020 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -368,19 +368,6 @@ module ietf-babel {
         description
           "Sequence number included in route updates for routes
            originated by this node.";
-        reference
-          "RFC ZZZZ: Babel Information Model, Section 3.1.";
-      }
-
-      leaf-list metric-comp-algorithms {
-        type identityref {
-          base "metric-comp-algorithms";
-        }
-        config false;
-        min-elements 1;
-        description
-          "List of cost compute algorithms supported by this
-           implementation of Babel.";
         reference
           "RFC ZZZZ: Babel Information Model, Section 3.1.";
       }

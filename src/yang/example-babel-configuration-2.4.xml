@@ -28,7 +28,8 @@
     <control-plane-protocols>
       <control-plane-protocol>
 	<type
-	    xmlns:babel="urn:ietf:params:xml:ns:yang:ietf-babel">babel:babel
+	    xmlns:babel=
+	    "urn:ietf:params:xml:ns:yang:ietf-babel">babel:babel
 	</type>
 	<name>name:babel</name>
 	<babel
