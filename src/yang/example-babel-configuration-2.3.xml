@@ -20,12 +20,22 @@
 	<babel
 	    xmlns="urn:ietf:params:xml:ns:yang:ietf-babel">
 	  <enable>true</enable>
+	  <stats-enable>true</stats-enable>
 	  <interfaces>
 	    <reference>eth0</reference>
 	    <metric-algorithm>two-out-of-three</metric-algorithm>
 	    <split-horizon>true</split-horizon>
 	  </interfaces>
-	  <stats-enable>true</stats-enable>
+	  <mac>
+	    <name>hmac-sha256</name>
+	    <keys>
+	      <name>hmac-sha256-keys</name>
+	      <use-sign>true</use-sign>
+	      <use-verify>true</use-verify>
+	      <value>base64encodedvalue==</value>
+	      <algorithm>hmac-sha256</algorithm>
+	    </keys>
+	  </mac>
 	</babel>
       </control-plane-protocol>
     </control-plane-protocols>

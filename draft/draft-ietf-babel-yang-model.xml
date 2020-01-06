@@ -370,7 +370,10 @@ reference: RFC XXXX ]]></artwork>
 
       <section title="Statistics Gathering Enabled">
         <t>In this example, interface eth0 is being configured for routing
-        protocol Babel, and statistics gathering is enabled.<figure>
+        protocol Babel, and statistics gathering is enabled. For security,
+        HMAC-SHA256 is supported, with every Babel packets signed with the key
+        value provided, and every received Babel packet verified with the same
+        key value.<figure>
             <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(../src/yang/example-babel-configuration-2.3.xml)
 ]]></artwork>

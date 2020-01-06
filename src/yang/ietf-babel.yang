@@ -72,14 +72,44 @@ module ietf-babel {
    */
   feature two-out-of-three-supported {
     description
-      "This implementation can support two-out-of-three metric
+      "This implementation supports two-out-of-three metric
        comp algorithm.";
   }
 
   feature etx-supported {
     description
-      "This implementation can support Expected Transmission Count
+      "This implementation supports Expected Transmission Count
        (ETX) metric comp algorithm.";
+  }
+
+  feature mac-supported {
+    description
+      "This implementation supports MAC based security.";
+  }
+
+  feature dtls-supported {
+    description
+      "This implementation supports DTLS based security.";
+  }
+
+  feature hmac-sha256-supported {
+    description
+      "This implementation supports hmac-sha256 MAC algorithm.";
+  }
+
+  feature blake2s-supported {
+    description
+      "This implementation supports blake2 MAC algorithm.";
+  }
+
+  feature x-509-supported {
+    description
+      "This implementation supports x-509 certificate type.";
+  }
+
+  feature raw-public-key-supported {
+    description
+      "This implementation supports raw-public-key certificate type.";
   }
 
   /*
@@ -106,29 +136,6 @@ module ietf-babel {
   }
 
   /*
-   * Babel security type identities
-   */
-  identity security-supported {
-    description
-      "Base identity from which all Babel security types are
-       derived.";
-  }
-
-  identity mac {
-    base security-supported;
-    description
-      "Keyed MAC supported.";
-  }
-
-  identity dtls {
-    base security-supported;
-    description
-      "Datagram Transport Layer Security (DTLS) supported.";
-    reference
-      "RFC 6347, Datagram Transport Layer Security Version 1.2.";
-  }
-
-  /*
    * Babel MAC algorithms identities.
    */
   identity mac-algorithms {
@@ -138,6 +145,8 @@ module ietf-babel {
 
   identity hmac-sha256 {
     base mac-algorithms;
+    if-feature mac-supported;
+    if-feature hmac-sha256-supported;
     description
       "HMAC-SHA256 algorithm supported.";
     reference
@@ -147,6 +156,8 @@ module ietf-babel {
 
   identity blake2s {
     base mac-algorithms;
+    if-feature mac-supported;
+    if-feature blake2s-supported;
     description
       "BLAKE2s algorithm supported.";
     reference
@@ -164,12 +175,16 @@ module ietf-babel {
 
   identity x-509 {
     base dtls-cert-types;
+    if-feature dtls-supported;
+    if-feature x-509-supported;
     description
       "X.509 certificate type.";
   }
 
   identity raw-public-key {
     base dtls-cert-types;
+    if-feature dtls-supported;
+    if-feature raw-public-key-supported;
     description
       "Raw Public Key type.";
   }
@@ -368,42 +383,6 @@ module ietf-babel {
         description
           "Sequence number included in route updates for routes
            originated by this node.";
-        reference
-          "RFC ZZZZ: Babel Information Model, Section 3.1.";
-      }
-
-      leaf-list security-supported {
-        type identityref {
-          base "security-supported";
-        }
-        config false;
-        min-elements 1;
-        description
-          "List of supported security mechanisms.";
-        reference
-          "RFC ZZZZ: Babel Information Model, Section 3.1.";
-      }
-
-      leaf-list mac-algorithms {
-        type identityref {
-          base mac-algorithms;
-        }
-        config false;
-        description
-          "List of supported MAC computation algorithms. Possible
-           values include 'HMAC-SHA256', 'BLAKE2s'.";
-        reference
-          "RFC ZZZZ: Babel Information Model, Section 3.1.";
-      }	  
-
-      leaf-list dtls-cert-types {
-        type identityref {
-          base dtls-cert-types;
-        }
-        config false;
-        description
-          "List of supported DTLS certificate types. Possible values
-           include 'X.509' and 'RawPublicKey'.";
         reference
           "RFC ZZZZ: Babel Information Model, Section 3.1.";
       }
