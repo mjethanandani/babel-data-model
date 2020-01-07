@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-ietf-babel-yang-model-04" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-babel-yang-model-05" ipr="trust200902">
   <front>
     <title abbrev="Babel YANG model">YANG Data Model for Babel</title>
 
@@ -65,7 +65,7 @@
       </address>
     </author>
 
-    <date day="18" month="October" year="2019"/>
+    <date day="3" month="January" year="2020"/>
 
     <area>Routing Area</area>
 
@@ -370,7 +370,10 @@ reference: RFC XXXX ]]></artwork>
 
       <section title="Statistics Gathering Enabled">
         <t>In this example, interface eth0 is being configured for routing
-        protocol Babel, and statistics gathering is enabled.<figure>
+        protocol Babel, and statistics gathering is enabled. For security,
+        HMAC-SHA256 is supported. Every sent Babel packets is signed with the
+        key value provided, and every received Babel packet is verified with
+        the same key value.<figure>
             <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(../src/yang/example-babel-configuration-2.3.xml)
 ]]></artwork>
