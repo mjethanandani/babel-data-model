@@ -391,7 +391,9 @@ module ietf-babel {
         type boolean;
         description
           "Indicates whether statistics collection is enabled (true)
-           or disabled (false) on all interfaces.";
+           or disabled (false) on all interfaces. When enabled,
+           existing statistics values are not cleared and will be
+           incremented as new packets are counted.";
       }
      
       container constants {
