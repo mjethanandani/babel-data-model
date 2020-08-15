@@ -122,15 +122,15 @@ module ietf-babel {
   }
 
   identity two-out-of-three {
-    base "metric-comp-algorithms";
     if-feature two-out-of-three-supported;
+    base "metric-comp-algorithms";
     description
       "2-out-of-3 algorithm.";
   }
 
   identity etx {
-    base "metric-comp-algorithms";
     if-feature etx-supported;
+    base "metric-comp-algorithms";
     description
       "Expected Transmission Count.";
   }
@@ -144,9 +144,9 @@ module ietf-babel {
   }
 
   identity hmac-sha256 {
-    base mac-algorithms;
     if-feature mac-supported;
     if-feature hmac-sha256-supported;
+    base mac-algorithms;
     description
       "HMAC-SHA256 algorithm supported.";
     reference
@@ -155,9 +155,9 @@ module ietf-babel {
   }
 
   identity blake2s {
-    base mac-algorithms;
     if-feature mac-supported;
     if-feature blake2s-supported;
+    base mac-algorithms;
     description
       "BLAKE2s algorithm supported.";
     reference
@@ -174,17 +174,17 @@ module ietf-babel {
   }
 
   identity x-509 {
-    base dtls-cert-types;
     if-feature dtls-supported;
     if-feature x-509-supported;
+    base dtls-cert-types;
     description
       "X.509 certificate type.";
   }
 
   identity raw-public-key {
-    base dtls-cert-types;
     if-feature dtls-supported;
     if-feature raw-public-key-supported;
+    base dtls-cert-types;
     description
       "Raw Public Key type.";
   }
