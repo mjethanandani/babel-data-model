@@ -85,31 +85,49 @@ module ietf-babel {
   feature mac-supported {
     description
       "This implementation supports MAC based security.";
+    reference
+      "draft-ietf-babel-hmac: MAC authentication for Babel Routing
+       Protocol.";
   }
 
   feature dtls-supported {
     description
       "This implementation supports DTLS based security.";
+    reference
+      "draft-ietf-babel-dtls: Babel Routing Protocol over Datagram
+       Transport Layer Security.";
   }
 
   feature hmac-sha256-supported {
     description
       "This implementation supports hmac-sha256 MAC algorithm.";
+    reference
+      "draft-ietf-babel-hmac: MAC authentication for Babel Routing
+       Protocol.";
   }
 
   feature blake2s-supported {
     description
       "This implementation supports blake2 MAC algorithm.";
+    reference
+      "draft-ietf-babel-hmac: MAC authentication for Babel Routing
+       Protocol.";
   }
 
   feature x-509-supported {
     description
       "This implementation supports x-509 certificate type.";
+    reference
+      "draft-ietf-babel-dtls: Babel Routing Protocol over Datagram
+       Transport Layer Security.";
   }
 
   feature raw-public-key-supported {
     description
       "This implementation supports raw-public-key certificate type.";
+    reference
+      "draft-ietf-babel-dtls: Babel Routing Protocol over Datagram
+       Transport Layer Security.";
   }
 
   /*
@@ -126,6 +144,9 @@ module ietf-babel {
     base "metric-comp-algorithms";
     description
       "2-out-of-3 algorithm.";
+    reference
+      "draft-ietf-babel-rfc6126bis: The Babel Rotuing Protocol,
+       Section A.2.1.";
   }
 
   identity etx {
@@ -133,6 +154,9 @@ module ietf-babel {
     base "metric-comp-algorithms";
     description
       "Expected Transmission Count.";
+    reference
+      "draft-ietf-babel-rfc6126bis: The Babel Rotuing Protocol,
+       Section A.2.2.";
   }
 
   /*
@@ -516,7 +540,7 @@ module ietf-babel {
 
         leaf-list mac-key-sets {
           type leafref {
-            path "../../mac/name";
+            path "../../mac-key-set/name";
           }
           description
             "List of references to the mac entries that apply
@@ -530,10 +554,10 @@ module ietf-babel {
         leaf mac-verify {
           type boolean;
           description
-            "A Boolean flag indicating whether MAC hashes in
+            "A Boolean flag indicating whether MACs in
              incoming Babel packets are required to be present and
              are verified.  If this parameter is 'true', incoming
-             packets are required to have a valid MAC hash.";
+             packets are required to have a valid MAC.";
           reference
             "RFC ZZZZ: Babel Information Model, Section 3.3.";
         }
@@ -567,7 +591,9 @@ module ietf-babel {
              in ClientHello and ServerHello packets. The extension
              is included if the value is 'true'.";
           reference
-            "RFC ZZZZ: Babel Information Model, Section 3.3.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3.
+             draft-ietf-babel-dtls: Babel Routing Protocol over
+             Datagram Transport Layer Security, Appendix A.";
 	}
 
         leaf-list dtls-cert-prefer {
@@ -586,7 +612,9 @@ module ietf-babel {
              populate the client_certificate_type extension in a
              Client Hello.";
           reference
-            "RFC ZZZZ: Babel Information Model, Section 3.3.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3
+             draft-ietf-babel-dtls: Babel Routing Protocol over
+             Datagram Transport Layer Security, Appendix A.";
         }
 
         leaf packet-log-enable {
@@ -836,11 +864,11 @@ module ietf-babel {
         }
       }
 
-      list mac {
+      list mac-key-set {
         key "name";
 
         description
-          "A mac object. If this object is implemented, it
+          "A mac key set object. If this object is implemented, it
            provides access to parameters related to the MAC security
            mechanism.";
         reference
@@ -855,9 +883,9 @@ module ietf-babel {
         leaf default-apply {
           type boolean;
           description
-            "A Boolean flag indicating whether this mac
+            "A Boolean flag indicating whether this object
              instance is applied to all new interfaces, by default.
-             If 'true', this instance is applied to new
+             If 'true', this instance is applied to new babel-
              interfaces instances at the time they are created,
              by including it in the mac-key-sets list under
              interfaces. If 'false', this instance is not applied
@@ -888,14 +916,15 @@ module ietf-babel {
               "RFC ZZZZ: Babel Information Model, Section 3.8.";
           }
 
-          leaf use-sign {
+          leaf use-send {
             type boolean;
             mandatory true;
             description
-              "Indicates whether this key value is used to sign sent
-               Babel packets. Sent packets are signed using this key
-               if the value is 'true'. If the value is 'false', this
-               key is not used to sign sent Babel packets.";
+              "Indicates whether this key value is used to compute a
+               MAC and include that MAC in the sent Babel packet. A MAC
+               for sent packets is computed using this key if the value
+               is 'true'. If the value is 'false', this key is not used
+               to compute a MAC to include in sent Babel packets.";
             reference
               "RFC ZZZZ: Babel Information Model, Section 3.8.";
           }
@@ -956,13 +985,16 @@ module ietf-babel {
 
           action test {
             description
-              "An operation that allows the MAC key and hash
+              "An operation that allows the MAC key and MAC
                algorithm to be tested to see if they produce an
-               expected outcome. Input to this operation is a
-               binary string. The implementation is expected to
-               create a hash of this string using the value and
-               the algorithm. The output of this operation is
-               the resulting hash, as a binary string.";
+               expected outcome. Input to this operation are a
+               binary string and a calculated MAC (also in the
+               format of a binary string) for the binary string.
+               The implementation is expected to create a MAC over
+               the binary string using the value and algorithm.
+               The output of this operation is a binary indication that
+               the calculated MAC matched the input MAC (true) or the
+               MACs did not match (false).";
              reference
                "RFC ZZZZ: Babel Information Model, Section 3.8.";
 
@@ -1014,7 +1046,7 @@ module ietf-babel {
           type boolean;
           mandatory true;
           description
-            "A Boolean flag indicating whether this dtls
+            "A Boolean flag indicating whether this object
              instance is applied to all new interfaces, by default. If
              'true', this instance is applied to new interfaces
              instances at the time they are created, by including it
@@ -1042,7 +1074,7 @@ module ietf-babel {
           leaf name {
             type string;
             description
-              "A unique name for this DTLS certificate that can be
+              "A unique name for this certificate that can be
                used to identify the certificate in this object
                instance, since the value is too long to be useful
                for identification. This value MUST NOT be empty
@@ -1056,7 +1088,7 @@ module ietf-babel {
             type string;
             mandatory true;
             description
-              "The DTLS certificate in PEM format [RFC7468]. This
+              "The certificate in PEM format [RFC7468]. This
                value can only be provided when this instance is
                created, and is not subsequently writable.";
             reference
@@ -1092,29 +1124,6 @@ module ietf-babel {
                created, and is not subsequently writable.";
             reference
               "RFC ZZZZ: Babel Information Model, Section 3.10.";
-          }
-
-          action test {
-            input {
-              leaf test-string {
-                type binary;
-                mandatory true;
-                description
-                  "The test string on which this test has to be
-                   performed.";
-              }
-            }
-            output {
-              leaf resulting-hash {
-                type binary;
-                mandatory true;
-                description
-                  "The output of this operation is a binary string,
-                   and is the resulting hash computed using the
-                   certificate public key, and the SHA-256
-                   hash algorithm.";
-              }
-            }
           }
         }
       }

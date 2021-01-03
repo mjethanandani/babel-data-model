@@ -26,16 +26,16 @@
 	    <metric-algorithm>two-out-of-three</metric-algorithm>
 	    <split-horizon>true</split-horizon>
 	  </interfaces>
-	  <mac>
+	  <mac-key-set>
 	    <name>hmac-sha256</name>
 	    <keys>
 	      <name>hmac-sha256-keys</name>
-	      <use-sign>true</use-sign>
+	      <use-send>true</use-send>
 	      <use-verify>true</use-verify>
 	      <value>base64encodedvalue==</value>
 	      <algorithm>hmac-sha256</algorithm>
 	    </keys>
-	  </mac>
+	  </mac-key-set>
 	</babel>
       </control-plane-protocol>
     </control-plane-protocols>
