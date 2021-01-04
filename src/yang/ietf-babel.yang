@@ -108,7 +108,7 @@ module ietf-babel {
 
   feature blake2s-supported {
     description
-      "This implementation supports blake2 MAC algorithm.";
+      "This implementation supports blake2s MAC algorithms.";
     reference
       "draft-ietf-babel-hmac: MAC authentication for Babel Routing
        Protocol.";
@@ -145,7 +145,7 @@ module ietf-babel {
     description
       "2-out-of-3 algorithm.";
     reference
-      "draft-ietf-babel-rfc6126bis: The Babel Rotuing Protocol,
+      "draft-ietf-babel-rfc6126bis: The Babel Routing Protocol,
        Section A.2.1.";
   }
 
@@ -155,7 +155,7 @@ module ietf-babel {
     description
       "Expected Transmission Count.";
     reference
-      "draft-ietf-babel-rfc6126bis: The Babel Rotuing Protocol,
+      "draft-ietf-babel-rfc6126bis: The Babel Routing Protocol,
        Section A.2.2.";
   }
 
@@ -183,7 +183,7 @@ module ietf-babel {
     if-feature blake2s-supported;
     base mac-algorithms;
     description
-      "BLAKE2s algorithm supported.";
+      "BLAKE2s algorithms supported.";
     reference
       "RFC 7693: The BLAKE2 Cryptographic Hash and Message 
        Authentication Code (MAC).";
@@ -1005,19 +1005,32 @@ module ietf-babel {
                 description
                   "Input to this operation is a binary string.
                    The implementation is expected to create
-                   a hash of this string using the value and
-                   the algorithm.";
+                   a MAC over this string using the value and
+                   the algorithm defined as part of the mac-key-set.";
                 reference
                   "RFC ZZZZ: Babel Information Model, Section 3.8.";
               }
+
+	      leaf mac {
+		type binary;
+		mandatory true;
+		description
+		  "Input to this operation includes a calculated MAC.
+                   The implementation is expected to create
+                   a MAC over the string using the value and
+                   the algorithm defined as part of the mac-key-set.";
+                reference
+                  "RFC ZZZZ: Babel Information Model, Section 3.8.";
+	      }
             }
             output {
-              leaf resulting-hash {
-                type binary;
+              leaf indication {
+                type boolean;
                 mandatory true;
                 description
-                  "The output of this operation is
-                   the resulting hash, as a binary string.";
+                  "The output of this operation is a binary indication
+                   that the calculated MAC matched the input MAC (true)
+                   or the MACs did not match (false).";
                 reference
                   "RFC ZZZZ: Babel Information Model, Section 3.8.";
               }
