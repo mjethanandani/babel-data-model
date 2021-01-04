@@ -1015,10 +1015,11 @@ module ietf-babel {
 		type binary;
 		mandatory true;
 		description
-		  "Input to this operation includes a calculated MAC.
-                   The implementation is expected to create
-                   a MAC over the string using the value and
-                   the algorithm defined as part of the mac-key-set.";
+		  "Input to this operation includes a MAC.
+                   The implementation is expected to calculate a MAC
+                   over the string using the value and algorithm of
+                   this key object and compare its calculated MAC to
+                   this input MAC.";
                 reference
                   "RFC ZZZZ: Babel Information Model, Section 3.8.";
 	      }
