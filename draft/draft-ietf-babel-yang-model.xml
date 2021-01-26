@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-ietf-babel-yang-model-06" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-babel-yang-model-07" ipr="trust200902">
   <front>
     <title abbrev="Babel YANG model">YANG Data Model for Babel</title>
 
@@ -65,7 +65,7 @@
       </address>
     </author>
 
-    <date day="28" month="June" year="2020"/>
+    <date day="28" month="January" year="2021"/>
 
     <area>Routing Area</area>
 
@@ -94,10 +94,10 @@
       <t/>
 
       <t>This document defines a data model for the Babel routing protocol
-      <xref target="I-D.ietf-babel-rfc6126bis"/>. The data model is defined
-      using <xref target="RFC7950">YANG 1.1 </xref> data modeling language and
-      is <xref target="RFC8342">Network Management Datastore Architecture
-      (NDMA)</xref> compatible. It is based on the <xref
+      <xref target="RFC8966"/>. The data model is defined using <xref
+      target="RFC7950">YANG 1.1 </xref> data modeling language and is <xref
+      target="RFC8342">Network Management Datastore Architecture (NDMA)</xref>
+      compatible. It is based on the <xref
       target="I-D.ietf-babel-information-model">Babel Information Model
       </xref>.</t>
 
@@ -217,8 +217,8 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
         target="RFC7693">The Blake2 Cryptographic Hash and Message
         Authentication Code (MAC)</xref>, <xref
         target="I-D.ietf-babel-information-model">Babel Information
-        Model</xref>, and <xref target="I-D.ietf-babel-rfc6126bis">The Babel
-        Routing Protocol</xref>.</t>
+        Model</xref>, and <xref target="RFC8966">The Babel Routing
+        Protocol</xref>.</t>
 
         <figure>
           <artwork><![CDATA[
@@ -337,7 +337,7 @@ reference: RFC XXXX ]]></artwork>
 
       <?rfc include='reference.RFC.8349'?>
 
-      <?rfc include="reference.I-D.ietf-babel-rfc6126bis"?>
+      <?rfc include="reference.RFC.8966"?>
     </references>
 
     <references title="Informative References">
