@@ -108,7 +108,8 @@ module ietf-babel {
 
   feature blake2s-supported {
     description
-      "This implementation supports blake2s MAC algorithms.";
+      "This implementation supports blake2s MAC algorithms.
+       Specifically, BLAKE2-128 is supported.";
     reference
       "draft-ietf-babel-hmac: MAC authentication for Babel Routing
        Protocol.";
@@ -183,7 +184,8 @@ module ietf-babel {
     if-feature blake2s-supported;
     base mac-algorithms;
     description
-      "BLAKE2s algorithms supported.";
+      "BLAKE2s algorithms supported. Specifically, BLAKE2-128 is
+       supported.";
     reference
       "RFC 7693: The BLAKE2 Cryptographic Hash and Message 
        Authentication Code (MAC).";
@@ -959,7 +961,7 @@ module ietf-babel {
                between 0 and the block size of the underlying hash
                inclusive (where 'HMAC-SHA256' block size is 64
                bytes as described in [RFC4868]). If the algorithm
-               is 'BLAKE2s', the length MUST be between 0 and 32
+               is 'BLAKE2-128', the length MUST be between 0 and 32
                bytes inclusive, as described in [RFC7693].";
             reference
               "RFC ZZZZ: Babel Information Model, Section 3.8,
