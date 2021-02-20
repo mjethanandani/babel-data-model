@@ -137,7 +137,7 @@ module ietf-babel {
   identity metric-comp-algorithms {
     description
       "Base identity from which all Babel metric comp algorithms
-       are derived.";
+       MUST be derived.";
   }
 
   identity two-out-of-three {
@@ -146,8 +146,7 @@ module ietf-babel {
     description
       "2-out-of-3 algorithm.";
     reference
-      "draft-ietf-babel-rfc6126bis: The Babel Routing Protocol,
-       Section A.2.1.";
+      "RFC 8966: The Babel Routing Protocol, Section A.2.1.";
   }
 
   identity etx {
@@ -156,8 +155,7 @@ module ietf-babel {
     description
       "Expected Transmission Count.";
     reference
-      "draft-ietf-babel-rfc6126bis: The Babel Routing Protocol,
-       Section A.2.2.";
+      "RFC 8966: The Babel Routing Protocol, Section A.2.2.";
   }
 
   /*
@@ -275,8 +273,7 @@ module ietf-babel {
            calculated-metric or received-metric MUST be non-NULL.";
         reference
           "RFC ZZZZ: Babel Information Model, Section 3.6,
-           draft-ietf-babel-rfc6126bis: The Babel Routing Protocol,
-                                        Section 3.5.5.";
+           RFC 8966: The Babel Routing Protocol, Section 2.1.";
       }
 
       leaf calculated-metric {
@@ -289,8 +286,7 @@ module ietf-babel {
            calculated-metric or received-metric MUST be non-NULL.";
         reference
           "RFC ZZZZ: Babel Information Model, Section 3.6,
-           draft-ietf-babel-rfc6126bis: The Babel Routing Protocol,
-                                        Section 3.5.5.";
+           RFC 8966: The Babel Routing Protocol, Section 2.1.";
       }
 
       leaf seqno {
@@ -316,8 +312,7 @@ module ietf-babel {
           "A boolean flag indicating whether this route is feasible.";
         reference
           "RFC ZZZZ: Babel Information Model, Section 3.6,
-           draft-ietf-babel-rfc6126bis, The Babel Routing Protocol,
-           Section 3.5.1.";
+           RFC 8966, The Babel Routing Protocol, Section 3.5.1.";
       }
 
       leaf selected {
@@ -392,14 +387,18 @@ module ietf-babel {
 
       leaf router-id {
         type binary;
+	must '../enable = "true"';
         config false;
         description
           "Every Babel speaker is assigned a router-id, which is an
            arbitrary string of 8 octets that is assumed to be unique
-           across the routing domain";
+           across the routing domain.
+
+           The router-id is valid only if the protocol is enabled,
+           at which time a non-zero value is assigned.";
         reference
           "RFC ZZZZ: Babel Information Model, Section 3.1,
-           draft-ietf-babel-rfc6126bis: The Babel Routing Protocol,
+           RFC 8966: The Babel Routing Protocol,
                                         Section 3.";
       }
 
@@ -487,7 +486,7 @@ module ietf-babel {
              interface. The value MUST be one of those identities
              based on 'metric-comp-algorithms'.";
           reference
-            "RFC ZZZZ: Babel Information Model, Section 3.X.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3.";
         }
 
         leaf split-horizon {
@@ -498,7 +497,7 @@ module ietf-babel {
              A value of true indicates split horizon optimization
              is used.";
           reference
-            "RFC ZZZZ: Babel Information Model, Section 3.X.";
+            "RFC ZZZZ: Babel Information Model, Section 3.3.";
         }
 
         leaf mcast-hello-seqno {
@@ -673,7 +672,7 @@ module ietf-babel {
             type yt:counter32;
             description
               "A count of the number of unicast Hello packets sent
-               to this neighbor.";
+               on this interface.";
             reference
               "RFC ZZZZ: Babel Information Model, Section 3.6.";
           }
@@ -682,7 +681,7 @@ module ietf-babel {
             type yt:counter32;
             description
               "A count of the number of unicast update packets sent
-               to this neighbor.";
+               on this interface.";
             reference
               "RFC ZZZZ: Babel Information Model, Section 3.6.";
           }
@@ -690,8 +689,8 @@ module ietf-babel {
           leaf sent-ihu {
             type yt:counter32;
             description
-              "A count of the number of IHU packets sent to this
-               neighbor.";
+              "A count of the number of IHU packets sent on this
+               interface.";
             reference
               "RFC ZZZZ: Babel Information Model, Section 3.6.";
           }
