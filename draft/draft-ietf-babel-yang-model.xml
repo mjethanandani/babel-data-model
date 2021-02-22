@@ -10,12 +10,11 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-ietf-babel-yang-model-07" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-babel-yang-model-08" ipr="trust200902">
   <front>
     <title abbrev="Babel YANG model">YANG Data Model for Babel</title>
 
-    <author fullname="Mahesh Jethanandani" initials="M.J."
-            surname="Jethanandani">
+    <author fullname="Mahesh Jethanandani" initials="M.J." surname="Jethanandani">
       <organization>Kloud Services</organization>
 
       <address>
@@ -65,7 +64,7 @@
       </address>
     </author>
 
-    <date day="28" month="January" year="2021"/>
+    <date day="20" month="February" year="2021"/>
 
     <area>Routing Area</area>
 
@@ -76,16 +75,12 @@
     <keyword>YANG</keyword>
 
     <abstract>
-      <t>This document defines a data model for the Babel routing protocol.
-      The data model is defined using the YANG data modeling language.</t>
+      <t>This document defines a data model for the Babel routing protocol. The data model is defined using the YANG data modeling language.</t>
     </abstract>
 
     <note title="Requirements Language">
-      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-      "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-      "OPTIONAL" in this document are to be interpreted as described in <xref
-      target="RFC2119">BCP 14</xref><xref target="RFC8174"/> when, and only
-      when, they appear in all capitals, as shown here.</t>
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as
+      described in <xref target="RFC2119">BCP 14</xref><xref target="RFC8174"/> when, and only when, they appear in all capitals, as shown here.</t>
     </note>
   </front>
 
@@ -93,65 +88,42 @@
     <section title="Introduction">
       <t/>
 
-      <t>This document defines a data model for the Babel routing protocol
-      <xref target="RFC8966"/>. The data model is defined using <xref
-      target="RFC7950">YANG 1.1 </xref> data modeling language and is <xref
-      target="RFC8342">Network Management Datastore Architecture (NDMA)</xref>
-      compatible. It is based on the <xref
-      target="I-D.ietf-babel-information-model">Babel Information Model
+      <t>This document defines a data model for the Babel routing protocol <xref target="RFC8966"/>. The data model is defined using <xref target="RFC7950">YANG 1.1 </xref> data modeling language and
+      is <xref target="RFC8342">Network Management Datastore Architecture (NDMA)</xref> compatible. It is based on the <xref target="I-D.ietf-babel-information-model">Babel Information Model
       </xref>.</t>
 
       <section title="Note to RFC Editor">
-        <t>Artwork in this document contains shorthand references to drafts in
-        progress. Please apply the following replacements and remove this note
-        before publication.</t>
+        <t>Artwork in this document contains shorthand references to drafts in progress. Please apply the following replacements and remove this note before publication.</t>
 
         <t><list style="symbols">
-            <t>"XXXX" --&gt; the assigned RFC value for this draft both in
-            this draft and in the YANG models under the revision
-            statement.</t>
+            <t>"XXXX" --&gt; the assigned RFC value for this draft both in this draft and in the YANG models under the revision statement.</t>
 
-            <t>"ZZZZ" --&gt; the assigned RFC value for <xref
-            target="I-D.ietf-babel-information-model">Babel Information Model
-            </xref></t>
+            <t>"ZZZZ" --&gt; the assigned RFC value for <xref target="I-D.ietf-babel-information-model">Babel Information Model </xref></t>
 
-            <t>Revision date in model, in the format YYYY-MM-DD needs to get
-            updated with the date the draft gets approved. The date also needs
-            to get reflected on the line with &lt;CODE BEGINS&gt;.</t>
+            <t>Revision date in model, in the format YYYY-MM-DD needs to get updated with the date the draft gets approved. The date also needs to get reflected on the line with &lt;CODE
+            BEGINS&gt;.</t>
           </list></t>
       </section>
 
       <section title="Tree Diagram Annotations">
-        <t>For a reference to the annotations used in tree diagrams included
-        in this draft, please see <xref target="RFC8340">YANG Tree
-        Diagrams</xref>.</t>
+        <t>For a reference to the annotations used in tree diagrams included in this draft, please see <xref target="RFC8340">YANG Tree Diagrams</xref>.</t>
       </section>
     </section>
 
     <section title="Babel Module">
-      <t>This document defines a <xref target="RFC7950">YANG 1.1</xref> data
-      model for the configuration and management of Babel. The YANG module is
-      based on the <xref target="I-D.ietf-babel-information-model">Babel
-      Information Model</xref>.</t>
+      <t>This document defines a <xref target="RFC7950">YANG 1.1</xref> data model for the configuration and management of Babel. The YANG module is based on the <xref
+      target="I-D.ietf-babel-information-model">Babel Information Model</xref>.</t>
 
       <section title="Information Model">
-        <t>There are a few things that should be noted between the Babel
-        Information Model and this data module. The information model mandates
-        the definition of some of the attributes, e.g.
-        babel-implementation-version or the babel-self-router-id. These
-        attributes are marked a read-only objects in the information module as
-        well as in this data module. However, there is no way in the data
-        module to mandate that a read-only attribute be present. It is up to
-        the implementation of this data module to make sure that the
-        attributes that are marked read-only and are mandatory are indeed
-        present.</t>
+        <t>There are a few things that should be noted between the Babel Information Model and this data module. The information model mandates the definition of some of the attributes, e.g.
+        babel-implementation-version or the babel-self-router-id. These attributes are marked a read-only objects in the information module as well as in this data module. However, there is no way in
+        the data module to mandate that a read-only attribute be present. It is up to the implementation of this data module to make sure that the attributes that are marked read-only and are
+        mandatory are indeed present.</t>
       </section>
 
       <section title="Tree Diagram">
-        <t>The following diagram illustrates a top level hierarchy of the
-        model. In addition to information like the version number implemented
-        by this device, the model contains subtrees on constants, interfaces,
-        routes and security.</t>
+        <t>The following diagram illustrates a top level hierarchy of the model. In addition to information like the version number implemented by this device, the model contains subtrees on
+        constants, interfaces, routes and security.</t>
 
         <t><figure>
             <artwork><![CDATA[
@@ -159,66 +131,35 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
 ]]></artwork>
           </figure></t>
 
-        <t>The interfaces subtree describes attributes such as interface
-        object that is being referenced, the type of link as enumerated by
-        metric-algorithm and split-horizon and whether the interface is
-        enabled or not.</t>
+        <t>The interfaces subtree describes attributes such as interface object that is being referenced, the type of link as enumerated by metric-algorithm and split-horizon and whether the interface
+        is enabled or not.</t>
 
-        <t>The constants subtree describes the UDP port used for sending and
-        receiving Babel messages, and the multicast group used to send and
-        receive announcements on IPv6.</t>
+        <t>The constants subtree describes the UDP port used for sending and receiving Babel messages, and the multicast group used to send and receive announcements on IPv6.</t>
 
-        <t>The routes subtree describes objects such as the prefix for which
-        the route is advertised, a reference to the neighboring route, and
-        next-hop address.</t>
+        <t>The routes subtree describes objects such as the prefix for which the route is advertised, a reference to the neighboring route, and next-hop address.</t>
 
-        <t>Finally, for security two subtree are defined to contain MAC keys
-        and DTLS certificates. The mac subtree contains keys used with the MAC
-        security mechanism. The boolean flag default-apply indicates whether
-        the set of MAC keys is automatically applied to new interfaces. The
-        dtls subtree contains certificates used with DTLS security mechanism.
-        Similar to the MAC mechanism, the boolean flag default-apply indicates
-        whether the set of DTLS certificates is automatically applied to new
-        interfaces.</t>
+        <t>Finally, for security two subtree are defined to contain MAC keys and DTLS certificates. The mac subtree contains keys used with the MAC security mechanism. The boolean flag default-apply
+        indicates whether the set of MAC keys is automatically applied to new interfaces. The dtls subtree contains certificates used with DTLS security mechanism. Similar to the MAC mechanism, the
+        boolean flag default-apply indicates whether the set of DTLS certificates is automatically applied to new interfaces.</t>
       </section>
 
       <section title="YANG Module">
-        <t>This YANG module augments the <xref target="RFC8349">YANG Routing
-        Management</xref> module to provide a common framework for all routing
-        subsystems. By augmenting the module it provides a common building
-        block for routes, and Routing Information Bases (RIBs). It also has a
-        reference to an interface defined by <xref target="RFC8343">A YANG
-        Data Model for Interface Management</xref>.</t>
+        <t>This YANG module augments the <xref target="RFC8349">YANG Routing Management</xref> module to provide a common framework for all routing subsystems. By augmenting the module it provides a
+        common building block for routes, and Routing Information Bases (RIBs). It also has a reference to an interface defined by <xref target="RFC8343">A YANG Data Model for Interface
+        Management</xref>.</t>
 
-        <t>A router running Babel routing protocol can determine the
-        parameters it needs to use for an interface based on the interface
-        name. For example, it can detect that eth0 is a wired interface, and
-        that wlan0 is a wireless interface. This is not true for a tunnel
-        interface, where the link parameters need to be configured
-        explicitly.</t>
+        <t>A router running Babel routing protocol can determine the parameters it needs to use for an interface based on the interface name. For example, it can detect that eth0 is a wired interface,
+        and that wlan0 is a wireless interface. This is not true for a tunnel interface, where the link parameters need to be configured explicitly.</t>
 
-        <t>For a wired interface, it will assume '2-out-of-3'
-        'metric-algorithm', and 'split-horizon' set to true. On other hand,
-        for a wireless interface it will assume 'etx' 'metric-algorithm', and
-        'split-horizon' set to false. However, if the wired link is connected
-        to a wireless radio, the values can be overriden by setting
-        'metric-algorithm' to 'etx', and 'split-horizon' to false. Similarly,
-        an interface that is a metered 3G link, and used for fallback
-        connectivity needs much higher default time constants, e.g.
-        'mcast-hello-interval', and 'update-interval', in order to avoid
-        carrying control traffic as much as possible.</t>
+        <t>For a wired interface, it will assume '2-out-of-3' 'metric-algorithm', and 'split-horizon' set to true. On other hand, for a wireless interface it will assume 'etx' 'metric-algorithm', and
+        'split-horizon' set to false. However, if the wired link is connected to a wireless radio, the values can be overriden by setting 'metric-algorithm' to 'etx', and 'split-horizon' to false.
+        Similarly, an interface that is a metered 3G link, and used for fallback connectivity needs much higher default time constants, e.g. 'mcast-hello-interval', and 'update-interval', in order to
+        avoid carrying control traffic as much as possible.</t>
 
-        <t>In addition to the modules used above, this module imports
-        definitions from <xref target="RFC6991">Common YANG Data Types</xref>,
-        and references <xref target="RFC2104">HMAC: Keyed-Hashing for Message
-        Authentication</xref>, <xref target="RFC4868">Using HMAC-SHA-256,
-        HMAC-SHA-384, and HMAC-SHA-512</xref>, <xref target="RFC6347">Datagram
-        Transport Layer Security Version 1.2</xref>, <xref
-        target="RFC7693">The Blake2 Cryptographic Hash and Message
-        Authentication Code (MAC)</xref>, <xref
-        target="I-D.ietf-babel-information-model">Babel Information
-        Model</xref>, and <xref target="RFC8966">The Babel Routing
-        Protocol</xref>.</t>
+        <t>In addition to the modules used above, this module imports definitions from <xref target="RFC6991">Common YANG Data Types</xref>, and references <xref target="RFC2104">HMAC: Keyed-Hashing
+        for Message Authentication</xref>, <xref target="RFC4868">Using HMAC-SHA-256, HMAC-SHA-384, and HMAC-SHA-512</xref>, <xref target="RFC6347">Datagram Transport Layer Security Version
+        1.2</xref>, <xref target="RFC7693">The Blake2 Cryptographic Hash and Message Authentication Code (MAC)</xref>, <xref target="I-D.ietf-babel-information-model">Babel Information Model</xref>,
+        and <xref target="RFC8966">The Babel Routing Protocol</xref>.</t>
 
         <figure>
           <artwork><![CDATA[
@@ -239,8 +180,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD.yang)
       </section>
 
       <section title="YANG Module Name Registration">
-        <t>This document registers one YANG module in the YANG Module Names
-        registry <xref target="RFC6020">YANG</xref>.</t>
+        <t>This document registers one YANG module in the YANG Module Names registry <xref target="RFC6020">YANG</xref>.</t>
 
         <figure>
           <artwork><![CDATA[Name:ietf-babel
@@ -252,70 +192,41 @@ reference: RFC XXXX ]]></artwork>
     </section>
 
     <section anchor="Security" title="Security Considerations">
-      <t>The YANG module specified in this document defines a schema for data
-      that is designed to be accessed via network management protocol such as
-      <xref target="RFC6241">NETCONF</xref> or <xref
-      target="RFC8040">RESTCONF</xref>. The lowest NETCONF layer is the secure
-      transport layer and the mandatory-to-implement secure transport is <xref
-      target="RFC6242">SSH</xref>. The lowest RESTCONF layer is HTTPS, and the
-      mandatory-to-implement secure transport is <xref
-      target="RFC8446">TLS</xref>.</t>
+      <t>The YANG module specified in this document defines a schema for data that is designed to be accessed via network management protocol such as <xref target="RFC6241">NETCONF</xref> or <xref
+      target="RFC8040">RESTCONF</xref>. The lowest NETCONF layer is the secure transport layer and the mandatory-to-implement secure transport is <xref target="RFC6242">SSH</xref>. The lowest RESTCONF
+      layer is HTTPS, and the mandatory-to-implement secure transport is <xref target="RFC8446">TLS</xref>.</t>
 
-      <t>The NETCONF Access Control Model (<xref target="RFC8341">NACM</xref>)
-      provides the means to restrict access for particular NETCONF users to a
-      pre-configured subset of all available NETCONF protocol operations and
-      content.</t>
+      <t>The NETCONF Access Control Model (<xref target="RFC8341">NACM</xref>) provides the means to restrict access for particular NETCONF users to a pre-configured subset of all available NETCONF
+      protocol operations and content.</t>
 
-      <t>There are a number of data nodes defined in the YANG module which are
-      writable/created/deleted (i.e., config true, which is the default).
-      These data nodes may be considered sensitive or vulnerable in some
-      network environments. Write operations (e.g., &lt;edit-config&gt;) to
-      these data nodes without proper protection can have a negative effect on
-      network operations.These are the subtrees and data nodes and their
-      sensitivity/vulnerability from a config true perspective:</t>
+      <t>There are a number of data nodes defined in the YANG module which are writable/created/deleted (i.e., config true, which is the default). These data nodes may be considered sensitive or
+      vulnerable in some network environments. Write operations (e.g., &lt;edit-config&gt;) to these data nodes without proper protection can have a negative effect on network operations.These are the
+      subtrees and data nodes and their sensitivity/vulnerability from a config true perspective:</t>
 
-      <t>babel: This container includes an "enable" parameter that can be used
-      to enable or disable use of Babel on a router</t>
+      <t>babel: This container includes an "enable" parameter that can be used to enable or disable use of Babel on a router</t>
 
-      <t>babel/constants: This container includes configuration parameters
-      that can prevent reachability if misconfigured.</t>
+      <t>babel/constants: This container includes configuration parameters that can prevent reachability if misconfigured.</t>
 
-      <t>babel/interfaces: This leaf-list has configuration parameters that
-      can enable/disable security mechanisms and change performance
-      characteristics of the Babel protocol.</t>
+      <t>babel/interfaces: This leaf-list has configuration parameters that can enable/disable security mechanisms and change performance characteristics of the Babel protocol.</t>
 
-      <t>babel/hmac and babel/dtls: These contain security credentials that
-      influence whether packets are trusted.</t>
+      <t>babel/hmac and babel/dtls: These contain security credentials that influence whether packets are trusted.</t>
 
-      <t>Some of the readable data or config false nodes in this YANG module
-      may be considered sensitive or vulnerable in some network environments.
-      It is thus important to control read access (e.g., via get, get-config,
-      or notification) to these data nodes. These are the subtrees and data
-      nodes and their sensitivity/vulnerability from a config false
-      perpective:</t>
+      <t>Some of the readable data or config false nodes in this YANG module may be considered sensitive or vulnerable in some network environments. It is thus important to control read access (e.g.,
+      via get, get-config, or notification) to these data nodes. These are the subtrees and data nodes and their sensitivity/vulnerability from a config false perpective:</t>
 
-      <t>babel: Access to the information in the various nodes can disclose
-      the network topology. Additionally, the routes used by a network device
-      may be used to mount a subsequent attack on traffic traversing the
-      network device.</t>
+      <t>babel: Access to the information in the various nodes can disclose the network topology. Additionally, the routes used by a network device may be used to mount a subsequent attack on traffic
+      traversing the network device.</t>
 
-      <t>babel/hmac and babel/dtls: These contain security credentials,
-      include private credentials of the router.</t>
+      <t>babel/hmac and babel/dtls: These contain security credentials, include private credentials of the router.</t>
 
-      <t>Some of the RPC operations in this YANG module may be considered
-      sensitive or vulnerable in some network environments. It is thus
-      important to control access to these operations. These are the
-      operations and their sensitivity/vulnerability from a RPC operation
-      perspective:</t>
+      <t>Some of the RPC operations in this YANG module may be considered sensitive or vulnerable in some network environments. It is thus important to control access to these operations. These are
+      the operations and their sensitivity/vulnerability from a RPC operation perspective:</t>
 
-      <t>babel/hmac/hmac/keys/test and babel/dtls/certs/test: These can be
-      used in a brute force attack to identify the credentials being used to
-      secure the Babel protocol.</t>
+      <t>babel/hmac/hmac/keys/test and babel/dtls/certs/test: These can be used in a brute force attack to identify the credentials being used to secure the Babel protocol.</t>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
-      <t>Juliusz Chroboczek provided most of the example configurations for
-      babel that are shown in the Appendix.</t>
+      <t>Juliusz Chroboczek provided most of the example configurations for babel that are shown in the Appendix.</t>
     </section>
   </middle>
 
@@ -365,15 +276,11 @@ reference: RFC XXXX ]]></artwork>
     </references>
 
     <section title="An Appendix">
-      <t>This section is devoted to examples that demonstrate how Babel can be
-      configured.</t>
+      <t>This section is devoted to examples that demonstrate how Babel can be configured.</t>
 
       <section title="Statistics Gathering Enabled">
-        <t>In this example, interface eth0 is being configured for routing
-        protocol Babel, and statistics gathering is enabled. For security,
-        HMAC-SHA256 is supported. Every sent Babel packets is signed with the
-        key value provided, and every received Babel packet is verified with
-        the same key value.<figure>
+        <t>In this example, interface eth0 is being configured for routing protocol Babel, and statistics gathering is enabled. For security, HMAC-SHA256 is supported. Every sent Babel packets is
+        signed with the key value provided, and every received Babel packet is verified with the same key value.<figure>
             <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(../src/yang/example-babel-configuration-2.3.xml)
 ]]></artwork>
