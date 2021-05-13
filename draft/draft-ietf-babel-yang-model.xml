@@ -14,7 +14,7 @@
   <front>
     <title abbrev="Babel YANG model">YANG Data Model for Babel</title>
 
-    <author fullname="Mahesh Jethanandani" initials="M.J." surname="Jethanandani">
+    <author fullname="Mahesh Jethanandani" initials="M." surname="Jethanandani">
       <organization>Kloud Services</organization>
 
       <address>
@@ -38,7 +38,7 @@
       </address>
     </author>
 
-    <author fullname="Barbara Stark" initials="B.S." surname="Stark">
+    <author fullname="Barbara Stark" initials="B." surname="Stark">
       <organization>AT&amp;T</organization>
 
       <address>
@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="12" month="April" year="2021"/>
+    <date day="12" month="May" year="2021"/>
 
     <area>Routing Area</area>
 
