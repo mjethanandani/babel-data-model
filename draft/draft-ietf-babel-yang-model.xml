@@ -154,10 +154,21 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
         'split-horizon' to false. Similarly, an interface that is a metered 3G link, and used for fallback connectivity needs much higher default time constants, e.g. 'mcast-hello-interval', and
         'update-interval', in order to avoid carrying control traffic as much as possible.</t>
 
-        <t>In addition to the modules used above, this module imports definitions from <xref target="RFC6991">Common YANG Data Types</xref>, and references <xref target="RFC2104">HMAC: Keyed-Hashing
-        for Message Authentication</xref>, <xref target="RFC4868">Using HMAC-SHA-256, HMAC-SHA-384, and HMAC-SHA-512</xref>, <xref target="RFC6347">Datagram Transport Layer Security Version
-        1.2</xref>, <xref target="RFC7693">The Blake2 Cryptographic Hash and Message Authentication Code (MAC)</xref>, <xref target="I-D.ietf-babel-information-model">Babel Information Model</xref>,
-        <xref target="RFC8966">The Babel Routing Protocol</xref>, and <xref target="RFC8967">MAC Authentication for Babel</xref>.</t>
+        <t>In addition to the modules used above, this module imports
+	definitions from <xref target="RFC6991">Common YANG Data Types</xref>,
+	and references <xref target="RFC2104">HMAC: Keyed-Hashing
+        for Message Authentication</xref>,
+	<xref target="RFC4868">Using HMAC-SHA-256, HMAC-SHA-384, and
+	HMAC-SHA-512</xref>, <xref target="RFC6347">Datagram Transport
+	Layer Security Version 1.2</xref>, <xref target="RFC7693">The
+	Blake2 Cryptographic Hash and Message Authentication Code
+	(MAC)</xref>, <xref target="I-D.ietf-babel-information-model">Babel
+	Information Model</xref>, <xref target="RFC8966">The Babel Routing
+	Protocol</xref>, <xref target="I-D.ietf-netconf-crypto-types">YANG
+	Data Types and Groupings for Cryptography</xref>,
+	<xref target="RFC8341">Network Configuration Access Control
+	Model</xref>
+	and <xref target="RFC8967">MAC Authentication for Babel</xref>.</t>
 
         <figure>
           <artwork><![CDATA[
@@ -242,6 +253,8 @@ reference: RFC XXXX ]]></artwork>
 
       <?rfc include="reference.RFC.8174.xml"?>
 
+      <?rfc include="reference.RFC.8341.xml"?>
+
       <?rfc include='reference.RFC.8343.xml'?>
 
       <?rfc include='reference.RFC.8349.xml'?>
@@ -249,6 +262,8 @@ reference: RFC XXXX ]]></artwork>
       <?rfc include="reference.RFC.8966.xml"?>
 
       <?rfc include='reference.RFC.8967.xml'?>
+
+      <?rfc include='reference.I-D.ietf-netconf-crypto-types.xml'?>
     </references>
 
     <references title="Informative References">
@@ -266,8 +281,6 @@ reference: RFC XXXX ]]></artwork>
 
       <?rfc include="reference.RFC.8340.xml"?>
 
-      <?rfc include="reference.RFC.8341.xml"?>
-
       <?rfc include='reference.RFC.8342.xml'?>
 
       <?rfc include="reference.RFC.8446.xml"?>
@@ -276,15 +289,27 @@ reference: RFC XXXX ]]></artwork>
     </references>
 
     <section title="An Appendix">
-      <t>This section is devoted to examples that demonstrate how Babel can be configured.</t>
+      <t>This section is devoted to including a complete tree diagram and
+      examples that demonstrate how Babel can be configured.</t>
+
+      <section title="Complete Tree Diagram">
+	<t>This section includes the complete tree diagram for
+	the Babel YANG module.
+	<figure>
+	  <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-tree.txt)
+]]></artwork>
+        </figure></t>
+      </section>
 
       <section title="Statistics Gathering Enabled">
         <t>In this example, interface eth0 is being configured for routing protocol Babel, and statistics gathering is enabled. For security, HMAC-SHA256 is supported. Every sent Babel packets is
-        signed with the key value provided, and every received Babel packet is verified with the same key value.<figure>
-            <artwork><![CDATA[
+        signed with the key value provided, and every received Babel packet is verified with the same key value.
+	<figure>
+          <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(../src/yang/example-babel-configuration-2.3.xml)
 ]]></artwork>
-          </figure></t>
+        </figure></t>
       </section>
 
       <section title="Automatic Detection of Properties">

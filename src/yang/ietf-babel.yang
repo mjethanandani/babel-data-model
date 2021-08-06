@@ -23,6 +23,17 @@ module ietf-babel {
     reference
       "RFC 8349: YANG Routing Management";
   }
+  import ietf-crypto-types {
+    prefix ct;
+    reference
+      "I-D.ietf-netconf-crypto-types: YANG Data Types and Groupings
+       for Cryptographay.";
+  }
+  import ietf-netconf-acm {
+    prefix nacm;
+    reference
+      "RFC 8341: Network Configuration Access Control Model";
+  }
 
   organization
     "IETF Babel routing protocol Working Group";
@@ -109,8 +120,7 @@ module ietf-babel {
 
   feature blake2s-supported {
     description
-      "This implementation supports blake2s MAC algorithms.
-       Specifically, BLAKE2-128 is supported.";
+      "This implementation supports blake2s MAC algorithms.";
     reference
       "RFC 8967: MAC authentication for Babel Routing
        Protocol.";
@@ -247,7 +257,9 @@ module ietf-babel {
       }
 
       leaf router-id {
-        type binary;
+        type binary {
+          length 8;
+        }
         description
           "router-id of the source router for which this route is
            advertised.";
@@ -651,12 +663,24 @@ module ietf-babel {
             "RFC ZZZZ: Babel Information Model, Section 3.3.";
         }
 
-        container stats {
+        container statistics {
           config false;
           description
             "Statistics collection object for this interface.";
           reference
             "RFC ZZZZ: Babel Information Model, Section 3.3.";
+
+          leaf discontinuity-time {
+            type yang:date-and-time;
+            mandatory true;
+            description
+              "The time on the most recent occasion at which any one
+               or more of counters suffered a discontinuity. If no
+               such discontinuities have occurred since the last
+               re-initialization of the local management subsystem,
+               then this node contains the time the local management
+               subsystem re-initialized itself.";
+          }
 
           leaf sent-mcast-hello {
             type yang:counter32;
@@ -769,9 +793,11 @@ module ietf-babel {
                recent Hello placed in the most significant bit and
                prior Hellos shifted right (with '0' bits placed
                between prior Hellos and most recent Hello for any
-               not-received Hellos); represented as a string using
-               utf-8 encoded hex digits where a '1' bit = Hello
-               received and a '0' bit = Hello not received.";
+               not-received Hellos); represented as a string of
+               utf-8 encoded hex digits. A bit that is set indicates
+               that the corresponding Hello was received, and a bit
+               that is cleared indicates that the corresponding Hello
+               was not received.";
             reference
               "RFC ZZZZ: Babel Information Model, Section 3.5.";
           }
@@ -952,6 +978,7 @@ module ietf-babel {
           }
 
           leaf value {
+            nacm:default-deny-write;
             type binary;
             mandatory true;
             description
@@ -1119,6 +1146,7 @@ module ietf-babel {
           }
 
           leaf value {
+            nacm:default-deny-write;
             type string;
             mandatory true;
             description
@@ -1130,6 +1158,7 @@ module ietf-babel {
           }
 
           leaf type {
+            nacm:default-deny-write;
             type identityref {
               base dtls-cert-types;
             }
@@ -1146,6 +1175,7 @@ module ietf-babel {
           }
 
           leaf private-key {
+            nacm:default-deny-all;
             type binary;
             mandatory true;
             description
@@ -1159,6 +1189,19 @@ module ietf-babel {
                created, and is not subsequently writable.";
             reference
               "RFC ZZZZ: Babel Information Model, Section 3.10.";
+          }
+
+          leaf algorithm {
+            nacm:default-deny-write;
+            type identityref {
+              base ct:private-key-format;
+            }
+            mandatory true;
+            description
+              "Identifies the algorithm identity with which the
+               private-key has been encoded. This value can only be
+               provided when this instance is created, and is not
+               subsequently writable.";
           }
         }
       }
