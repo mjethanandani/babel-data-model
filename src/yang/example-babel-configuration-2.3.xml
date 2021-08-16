@@ -18,7 +18,7 @@
       <babel
 	  xmlns="urn:ietf:params:xml:ns:yang:ietf-babel">
 	<enable>true</enable>
-	<stats-enable>true</stats-enable>
+	<statistics-enabled>true</statistics-enabled>
 	<interfaces>
 	  <reference>eth0</reference>
 	  <metric-algorithm>two-out-of-three</metric-algorithm>

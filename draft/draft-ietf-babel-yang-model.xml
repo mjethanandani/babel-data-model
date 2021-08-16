@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="12" month="May" year="2021"/>
+    <date day="15" month="August" year="2021"/>
 
     <area>Routing Area</area>
 
@@ -86,8 +86,7 @@
 
   <middle>
     <section title="Introduction">
-      <t>This document defines a data model for <xref target="RFC8966">The Babel Routing Protocol </xref>. The data model is defined using <xref target="RFC7950">YANG 1.1 </xref> data modeling
-      language and is <xref target="RFC8342">Network Management Datastore Architecture (NDMA)</xref> compatible. It is based on the <xref target="I-D.ietf-babel-information-model">Babel Information
+      <t>This document defines a data model for <xref target="RFC8966">The Babel Routing Protocol </xref>. The data model is defined using <xref target="RFC7950">YANG 1.1 </xref> and is <xref target="RFC8342">Network Management Datastore Architecture (NDMA)</xref> compatible. It is based on the <xref target="RFC9046">Babel Information
       Model </xref>. The data model only includes data nodes that are useful for managing Babel over IPv6.</t>
 
       <section title="Note to RFC Editor">
@@ -95,8 +94,6 @@
 
         <t><list style="symbols">
             <t>"XXXX" --&gt; the assigned RFC value for this draft both in this draft and in the YANG models under the revision statement.</t>
-
-            <t>"ZZZZ" --&gt; the assigned RFC value for <xref target="I-D.ietf-babel-information-model">Babel Information Model </xref></t>
 
             <t>Revision date in model, in the format YYYY-MM-DD needs to get updated with the date the draft gets approved. The date also needs to get reflected on the line with &lt;CODE
             BEGINS&gt;.</t>
@@ -110,18 +107,18 @@
 
     <section title="Babel Module">
       <t>This document defines a <xref target="RFC7950">YANG 1.1</xref> data model for the configuration and management of Babel. The YANG module is based on the <xref
-      target="I-D.ietf-babel-information-model">Babel Information Model</xref>.</t>
+      target="RFC9046">Babel Information Model</xref>.</t>
 
       <section title="Information Model">
-        <t>There are a few things that should be noted between the Babel Information Model and this data module. The information model mandates the definition of some of the attributes, e.g.
+        <t>There are a few things that should be noted between the Babel Information Model and this data module. The information model mandates the definition of some of the attributes, e.g.,
         'babel-implementation-version' or the 'babel-self-router-id'. These attributes are marked as read-only objects in the information module as well as in this data module. However, there is no way
         in the data module to mandate that a read-only attribute be present. It is up to the implementation of this data module to make sure that the attributes that are marked read-only and are
         mandatory are indeed present.</t>
       </section>
 
       <section title="Tree Diagram">
-        <t>The following diagram illustrates a top level hierarchy of the model. In addition to information like the version number implemented by this device, the model contains subtrees on
-        'constants', 'interfaces', 'routes' and 'security'.</t>
+        <t>The following diagram illustrates a top level hierarchy of the model. In addition to the version implemented by this device, the model contains subtrees on
+        'constants', 'interfaces', 'mac-key-set', 'dtls', and 'routes'.</t>
 
         <t><figure>
             <artwork><![CDATA[
@@ -129,15 +126,15 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
 ]]></artwork>
           </figure></t>
 
-        <t>The 'interfaces' subtree describes attributes such as 'interface' object that is being referenced, the type of link, e.g. wired, wireless or tunnel, as enumerated by 'metric-algorithm' and
+        <t>The 'interfaces' subtree describes attributes such as the 'interface' object that is being referenced, the type of link, e.g., wired, wireless or tunnel, as enumerated by 'metric-algorithm' and
         'split-horizon' and whether the interface is enabled or not.</t>
 
         <t>The 'constants' subtree describes the UDP port used for sending and receiving Babel messages, and the multicast group used to send and receive announcements on IPv6.</t>
 
         <t>The 'routes' subtree describes objects such as the prefix for which the route is advertised, a reference to the neighboring route, and 'next-hop' address.</t>
 
-        <t>Finally, for security two subtree are defined to contain MAC keys and DTLS certificates. The 'mac-key-set' subtree contains keys used with the MAC security mechanism. The boolean flag
-        'default-apply' indicates whether the set of MAC keys is automatically applied to new interfaces. The dtls subtree contains certificates used with DTLS security mechanism. Similar to the MAC
+        <t>Finally, for security two subtrees are defined to contain MAC keys and DTLS certificates. The 'mac-key-set' subtree contains keys used with the MAC security mechanism. The boolean flag
+        'default-apply' indicates whether the set of MAC keys is automatically applied to new interfaces. The 'dtls' subtree contains certificates used with DTLS security mechanism. Similar to the MAC
         mechanism, the boolean flag 'default-apply' indicates whether the set of DTLS certificates is automatically applied to new interfaces.</t>
       </section>
 
@@ -146,12 +143,12 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
         common building block for routes, and Routing Information Bases (RIBs). It also has a reference to an interface defined by <xref target="RFC8343">A YANG Data Model for Interface
         Management</xref>.</t>
 
-        <t>A router running Babel routing protocol can determine the parameters it needs to use for an interface based on the interface name. For example, it can detect that eth0 is a wired interface,
+        <t>A router running Babel routing protocol can sometimes determine the parameters it needs to use for an interface based on the interface name. For example, it can detect that eth0 is a wired interface,
         and that wlan0 is a wireless interface. This is not true for a tunnel interface, where the link parameters need to be configured explicitly.</t>
 
         <t>For a wired interface, it will assume 'two-out-of-three' for 'metric-algorithm', and 'split-horizon' set to true. On the other hand, for a wireless interface it will assume 'etx' for
-        'metric-algorithm', and 'split-horizon' set to false. However, if the wired link is connected to a wireless radio, the values can be overriden by setting 'metric-algorithm' to 'etx', and
-        'split-horizon' to false. Similarly, an interface that is a metered 3G link, and used for fallback connectivity needs much higher default time constants, e.g. 'mcast-hello-interval', and
+        'metric-algorithm', and 'split-horizon' set to false. However, if the wired link is connected to a wireless radio, the values can be over riden by setting 'metric-algorithm' to 'etx', and
+        'split-horizon' to false. Similarly, an interface that is a metered 3G link, and used for fallback connectivity needs much higher default time constants, e.g., 'mcast-hello-interval', and
         'update-interval', in order to avoid carrying control traffic as much as possible.</t>
 
         <t>In addition to the modules used above, this module imports
@@ -159,10 +156,10 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
 	and references <xref target="RFC2104">HMAC: Keyed-Hashing
         for Message Authentication</xref>,
 	<xref target="RFC4868">Using HMAC-SHA-256, HMAC-SHA-384, and
-	HMAC-SHA-512</xref>, <xref target="RFC6347">Datagram Transport
-	Layer Security Version 1.2</xref>, <xref target="RFC7693">The
+	HMAC-SHA-512 with IPsec</xref>, <xref target="I-D.ietf-tls-dtls13">The Datagram Transport
+	Layer Security (DTLS) Version 1.3</xref>, <xref target="RFC7693">The
 	Blake2 Cryptographic Hash and Message Authentication Code
-	(MAC)</xref>, <xref target="I-D.ietf-babel-information-model">Babel
+	(MAC)</xref>, <xref target="RFC9046">Babel
 	Information Model</xref>, <xref target="RFC8966">The Babel Routing
 	Protocol</xref>, <xref target="I-D.ietf-netconf-crypto-types">YANG
 	Data Types and Groupings for Cryptography</xref>,
@@ -182,14 +179,14 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD.yang)
     </section>
 
     <section anchor="IANA" title="IANA Considerations">
-      <t>This document registers one URIs and one YANG module.</t>
+      <t>This document registers a URIs and a YANG module.</t>
 
       <section title="URI Registrations">
         <t>URI: urn:ietf:params:xml:ns:yang:ietf-babel</t>
       </section>
 
       <section title="YANG Module Name Registration">
-        <t>This document registers one YANG module in the YANG Module Names registry <xref target="RFC6020">YANG</xref>.</t>
+        <t>This document registers a YANG module in the YANG Module Names registry <xref target="RFC6020">YANG</xref>.</t>
 
         <figure>
           <artwork><![CDATA[Name:ietf-babel
@@ -208,6 +205,8 @@ reference: RFC XXXX ]]></artwork>
       <t>The NETCONF Access Control Model (<xref target="RFC8341">NACM</xref>) provides the means to restrict access for particular NETCONF users to a pre-configured subset of all available NETCONF
       protocol operations and content.</t>
 
+      <t>The security considerations outlined here are specific to the YANG data model, and do not cover security considerations of the Babel protocol or its security mechanisms in <xref target="RFC8966">The Babel Routing Protocol</xref>, <xref target="RFC8967">MAC Authentication for the Babel Routing Protocol</xref>, and <xref target="RFC8968">Babel Routing Protocol over Data Transport Layer Security</xref>. Each of these have their own Security Considerations section for considerations that are specific to it.</t>
+
       <t>There are a number of data nodes defined in the YANG module which are writable/created/deleted (i.e., config true, which is the default). These data nodes may be considered sensitive or
       vulnerable in some network environments. Write operations (e.g., &lt;edit-config&gt;) to these data nodes without proper protection can have a negative effect on network operations. These are
       the subtrees and data nodes and their sensitivity/vulnerability from a config true perspective:</t>
@@ -218,7 +217,7 @@ reference: RFC XXXX ]]></artwork>
 
       <t>'babel/interfaces': This leaf-list has configuration parameters that can enable/disable security mechanisms and change performance characteristics of the Babel protocol.</t>
 
-      <t>'babel/hmac' and 'babel/dtls': These contain security credentials that influence whether packets are trusted.</t>
+      <t>'babel/hmac' and 'babel/dtls': These contain security credentials that influence whether incoming packets are trusted, and whether outgoing packets are produced in a way such that the receiver will treat them as trusted.</t>
 
       <t>Some of the readable data or config false nodes in this YANG module may be considered sensitive or vulnerable in some network environments. It is thus important to control read access (e.g.,
       via get, get-config, or notification) to these data nodes. These are the subtrees and data nodes and their sensitivity/vulnerability from a config false perpective:</t>
@@ -226,12 +225,12 @@ reference: RFC XXXX ]]></artwork>
       <t>'babel': Access to the information in the various nodes can disclose the network topology. Additionally, the routes used by a network device may be used to mount a subsequent attack on
       traffic traversing the network device.</t>
 
-      <t>'babel/hmac' and 'babel/dtls': These contain security credentials, include private credentials of the router.</t>
+      <t>'babel/hmac' and 'babel/dtls': These contain security credentials, including private credentials of the router; however it is required that these values not be readable.</t>
 
       <t>Some of the RPC operations in this YANG module may be considered sensitive or vulnerable in some network environments. It is thus important to control access to these operations. These are
       the operations and their sensitivity/vulnerability from a RPC operation perspective:</t>
 
-      <t>This model does not define any RPC operations.</t>
+      <t>This model defines two actions. Resetting the statistics within an interface container would be visible to any monitoring processes, which should be designed to account for the possibility of such a reset. The "test" action allows for validation that a MAC key and MAC algorithm have been properly configured. The MAC key is a sensitive piece of information, and it is important to prevent an attacker that does not know the MAC key from being able to determine the MAC value of an attacker-influenced plaintext. The "test" action has been designed to not reveal such information directly. Such information might also be revealed indirectly, due to side channels such as the time it takes to produce a response to the action. Implementations SHOULD use a constant-time comparison between the input mac and the locally generated MAC value for comparison, in order to avoid such side channel leakage.</t>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
@@ -245,9 +244,9 @@ reference: RFC XXXX ]]></artwork>
 
       <?rfc include='reference.RFC.4868.xml'?>
 
-      <?rfc include='reference.RFC.6347.xml'?>
-
       <?rfc include='reference.RFC.6991.xml'?>
+
+      <?rfc include='reference.RFC.7693.xml'?>
 
       <?rfc include="reference.RFC.7950.xml"?>
 
@@ -262,8 +261,15 @@ reference: RFC XXXX ]]></artwork>
       <?rfc include="reference.RFC.8966.xml"?>
 
       <?rfc include='reference.RFC.8967.xml'?>
+      
+      <?rfc include='reference.RFC.8968.xml'?>
+
+      <?rfc include="reference.RFC.9046.xml"?>
 
       <?rfc include='reference.I-D.ietf-netconf-crypto-types.xml'?>
+
+      <?rfc include='reference.I-D.ietf-tls-dtls13.xml'?>
+
     </references>
 
     <references title="Informative References">
@@ -275,8 +281,6 @@ reference: RFC XXXX ]]></artwork>
 
       <?rfc include="reference.RFC.6242.xml"?>
 
-      <?rfc include='reference.RFC.7693.xml'?>
-
       <?rfc include="reference.RFC.8040.xml"?>
 
       <?rfc include="reference.RFC.8340.xml"?>
@@ -284,11 +288,9 @@ reference: RFC XXXX ]]></artwork>
       <?rfc include='reference.RFC.8342.xml'?>
 
       <?rfc include="reference.RFC.8446.xml"?>
-
-      <?rfc include="reference.I-D.ietf-babel-information-model.xml"?>
     </references>
 
-    <section title="An Appendix">
+    <section title="Tree Diagram and Example Configurations">
       <t>This section is devoted to including a complete tree diagram and
       examples that demonstrate how Babel can be configured.</t>
 
