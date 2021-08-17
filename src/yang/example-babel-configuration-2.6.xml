@@ -9,47 +9,44 @@
 -->
 
 <?xml version="1.0" encoding="UTF-8"?>
-<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-  <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"
-	      xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">
-    <interface>
-      <name>eth0</name>
-      <type>ianaift:ethernetCsmacd</type>
-      <enabled>true</enabled>
-    </interface>
-    <interface>
-      <name>ppp0</name>
-      <type>ianaift:ppp</type>
-      <enabled>true</enabled>
-    </interface>
-  </interfaces>
-  <routing
-      xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
-    <control-plane-protocols>
-      <control-plane-protocol>
-	<type
-	    xmlns:babel=
-	    "urn:ietf:params:xml:ns:yang:ietf-babel">babel:babel
-	</type>
-	<name>name:babel</name>
-	<babel
-	    xmlns="urn:ietf:params:xml:ns:yang:ietf-babel">
+<interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"
+	    xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">
+  <interface>
+    <name>eth0</name>
+    <type>ianaift:ethernetCsmacd</type>
+    <enabled>true</enabled>
+  </interface>
+  <interface>
+    <name>ppp0</name>
+    <type>ianaift:ppp</type>
+    <enabled>true</enabled>
+  </interface>
+</interfaces>
+<routing
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
+  <control-plane-protocols>
+    <control-plane-protocol>
+      <type
+	  xmlns:babel=
+	  "urn:ietf:params:xml:ns:yang:ietf-babel">babel:babel</type>
+      <name>name:babel</name>
+      <babel
+	  xmlns="urn:ietf:params:xml:ns:yang:ietf-babel">
+	<enable>true</enable>
+	<interfaces>
+	  <reference>eth0</reference>
 	  <enable>true</enable>
-	  <interfaces>
-	    <reference>eth0</reference>
-	    <enable>true</enable>
-	    <metric-algorithm>two-out-of-three</metric-algorithm>
-	    <split-horizon>true</split-horizon>
-	  </interfaces>
-	  <interfaces>
-	    <reference>ppp0</reference>
-	    <enable>true</enable>
-	    <mcast-hello-interval>30</mcast-hello-interval>
-	    <update-interval>120</update-interval>
-	    <metric-algorithm>two-out-of-three</metric-algorithm>
-	  </interfaces>
-	</babel>
-      </control-plane-protocol>
-    </control-plane-protocols>
-  </routing>
-</config>
+	  <metric-algorithm>two-out-of-three</metric-algorithm>
+	  <split-horizon>true</split-horizon>
+	</interfaces>
+	<interfaces>
+	  <reference>ppp0</reference>
+	  <enable>true</enable>
+	  <mcast-hello-interval>30</mcast-hello-interval>
+	  <update-interval>120</update-interval>
+	  <metric-algorithm>two-out-of-three</metric-algorithm>
+	</interfaces>
+      </babel>
+    </control-plane-protocol>
+  </control-plane-protocols>
+</routing>
