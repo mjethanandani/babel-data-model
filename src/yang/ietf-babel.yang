@@ -84,7 +84,7 @@ module ietf-babel {
 
   feature two-out-of-three-supported {
     description
-      "This implementation supports the two-out-of-three metric
+      "This implementation supports the '2-out-of-3'
        computation algorithm.";
   }
 
@@ -112,7 +112,7 @@ module ietf-babel {
 
   feature hmac-sha256-supported {
     description
-      "This implementation supports the hmac-sha256 MAC algorithm.";
+      "This implementation supports the HMAC-SHA256 MAC algorithm.";
     reference
       "RFC 8967: MAC authentication for Babel Routing
        Protocol.";
@@ -120,7 +120,7 @@ module ietf-babel {
 
   feature blake2s-supported {
     description
-      "This implementation supports blake2s MAC algorithms.";
+      "This implementation supports BLAKE2s MAC algorithms.";
     reference
       "RFC 8967: MAC authentication for Babel Routing
        Protocol.";
@@ -128,7 +128,7 @@ module ietf-babel {
 
   feature x-509-supported {
     description
-      "This implementation supports the x-509 certificate type.";
+      "This implementation supports the X.509 certificate type.";
     reference
       "RFC 8968: Babel Routing Protocol over Datagram
        Transport Layer Security.";

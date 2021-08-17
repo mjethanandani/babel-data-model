@@ -147,7 +147,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD-abridged-tree.txt)
         and that wlan0 is a wireless interface. This is not true for a tunnel interface, where the link parameters need to be configured explicitly.</t>
 
         <t>For a wired interface, it will assume 'two-out-of-three' for 'metric-algorithm', and 'split-horizon' set to true. On the other hand, for a wireless interface it will assume 'etx' for
-        'metric-algorithm', and 'split-horizon' set to false. However, if the wired link is connected to a wireless radio, the values can be over riden by setting 'metric-algorithm' to 'etx', and
+        'metric-algorithm', and 'split-horizon' set to false. However, if the wired link is connected to a wireless radio, the values can be overriden by setting 'metric-algorithm' to 'etx', and
         'split-horizon' to false. Similarly, an interface that is a metered 3G link, and used for fallback connectivity needs much higher default time constants, e.g., 'mcast-hello-interval', and
         'update-interval', in order to avoid carrying control traffic as much as possible.</t>
 
@@ -179,7 +179,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-babel@YYYY-MM-DD.yang)
     </section>
 
     <section anchor="IANA" title="IANA Considerations">
-      <t>This document registers a URIs and a YANG module.</t>
+      <t>This document registers a URI and a YANG module.</t>
 
       <section title="URI Registrations">
         <t>URI: urn:ietf:params:xml:ns:yang:ietf-babel</t>
@@ -205,7 +205,7 @@ reference: RFC XXXX ]]></artwork>
       <t>The NETCONF Access Control Model (<xref target="RFC8341">NACM</xref>) provides the means to restrict access for particular NETCONF users to a pre-configured subset of all available NETCONF
       protocol operations and content.</t>
 
-      <t>The security considerations outlined here are specific to the YANG data model, and do not cover security considerations of the Babel protocol or its security mechanisms in <xref target="RFC8966">The Babel Routing Protocol</xref>, <xref target="RFC8967">MAC Authentication for the Babel Routing Protocol</xref>, and <xref target="RFC8968">Babel Routing Protocol over Data Transport Layer Security</xref>. Each of these have their own Security Considerations section for considerations that are specific to it.</t>
+      <t>The security considerations outlined here are specific to the YANG data model, and do not cover security considerations of the Babel protocol or its security mechanisms in <xref target="RFC8966">The Babel Routing Protocol</xref>, <xref target="RFC8967">MAC Authentication for the Babel Routing Protocol</xref>, and <xref target="RFC8968">Babel Routing Protocol over Data Transport Layer Security</xref>. Each of these has its own Security Considerations section for considerations that are specific to it.</t>
 
       <t>There are a number of data nodes defined in the YANG module which are writable/created/deleted (i.e., config true, which is the default). These data nodes may be considered sensitive or
       vulnerable in some network environments. Write operations (e.g., &lt;edit-config&gt;) to these data nodes without proper protection can have a negative effect on network operations. These are
