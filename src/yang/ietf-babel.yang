@@ -136,7 +136,7 @@ module ietf-babel {
 
   feature raw-public-key-supported {
     description
-      "This implementation supports the RawPubliKey certificate
+      "This implementation supports the Raw Public Key certificate
        type.";
     reference
       "RFC 8968: Babel Routing Protocol over Datagram
