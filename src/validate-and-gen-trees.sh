@@ -49,7 +49,7 @@ for i in yang/example-babel-configuration-*.xml
 do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name"
-    response=`yanglint -s -i -t auto -p ../../iana/yang-parameters ../../iana/yang-parameters/iana-if-type@2019-02-08.yang yang/ietf-babel\@$(date +%Y-%m-%d).yang $name`
+    response=`yanglint -i -t config --features="ietf-babel:two-out-of-three-supported,etx-supported,mac-supported,dtls-supprted,hmac-sha256-supported,blake2-supported" -p ../../iana/yang-parameters ../../iana/yang-parameters/iana-if-type@2019-02-08.yang yang/ietf-babel\@$(date +%Y-%m-%d).yang $name`
     if [ $? -ne 0 ]; then
        printf "failed (error code: $?)\n"
        printf "$response\n\n"
