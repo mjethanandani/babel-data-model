@@ -295,7 +295,7 @@ module ietf-babel {
           "The metric with which this route was advertised by the
            neighbor, or maximum value (infinity) to indicate the
            route was recently retracted and is temporarily
-           unreachable. This metric will be NULL (empty) if the
+           unreachable. This metric will be NULL if the
            route was not received from a neighbor but instead was
            injected through means external to the Babel routing 
            protocol. At least one of calculated-metric or 
@@ -337,12 +337,17 @@ module ietf-babel {
 
       leaf next-hop {
         type union {
-          type empty;
+          type enumeration {
+            enum null {
+              description
+                "Route has no next-hop address.";
+            }
+          }
           type inet:ip-address;
         }
         description
           "The next-hop address of this route. This will be NULL
-           (empty) if this route has no next-hop address.";
+           if this route has no next-hop address.";
         reference
           "RFC 9046: Babel Information Model, Section 3.6.";
       }
@@ -868,7 +873,7 @@ module ietf-babel {
               "Expected multicast Hello sequence number of next Hello
                to be received from this neighbor; if multicast Hello
                packets are not expected, or processing of multicast
-               packets is not enabled, this MUST be NULL (empty).";
+               packets is not enabled, this MUST be NULL.";
             reference
               "RFC 9046: Babel Information Model, Section 3.5.";
           }
@@ -889,7 +894,7 @@ module ietf-babel {
               "Expected unicast Hello sequence number of next Hello
                to be received from this neighbor; if unicast Hello
                packets are not expected, or processing of unicast
-               packets is not enabled, this MUST be NULL (empty).";
+               packets is not enabled, this MUST be NULL.";
             reference
               "RFC 9046: Babel Information Model, Section 3.5.";
           }
@@ -908,7 +913,7 @@ module ietf-babel {
             description
               "The current sequence number in use for unicast Hellos
                sent to this neighbor. If unicast Hellos are not being
-               sent, this MUST be NULL (empty).";
+               sent, this MUST be NULL.";
             reference
               "RFC 9046: Babel Information Model, Section 3.5.";
           }
