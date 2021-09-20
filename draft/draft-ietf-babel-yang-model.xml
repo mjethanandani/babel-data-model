@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="17" month="September" year="2021"/>
+    <date day="22" month="September" year="2021"/>
 
     <area>Routing Area</area>
 
@@ -215,7 +215,7 @@ reference: RFC XXXX ]]></artwork>
 
       <t>'babel/constants': This container includes configuration parameters that can prevent reachability if misconfigured.</t>
 
-      <t>'babel/interfaces': This leaf-list has configuration parameters that can enable/disable security mechanisms and change performance characteristics of the Babel protocol.</t>
+      <t>'babel/interfaces': This leaf-list has configuration parameters that can enable/disable security mechanisms and change performance characteristics of the Babel protocol. For example, enabling logging of packets and giving unintended access to the log files gives an attacker detailed knowledge of the network, and allows it to launch an attack on the traffic traversing the network device.</t>
 
       <t>'babel/hmac' and 'babel/dtls': These contain security credentials that influence whether incoming packets are trusted, and whether outgoing packets are produced in a way such that the receiver will treat them as trusted.</t>
 
